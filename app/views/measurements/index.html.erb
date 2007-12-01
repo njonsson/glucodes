@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>At</th>
     <th>Accounting date</th>
     <th>Accounting time period</th>
     <th>Value</th>
@@ -9,6 +10,7 @@
 
 <% for measurement in @measurements %>
   <tr>
+    <td><%=h measurement.at %></td>
     <td><%=h measurement.accounting_date %></td>
     <td><%=h measurement.accounting_time_period %></td>
     <td><%=h measurement.value %></td>

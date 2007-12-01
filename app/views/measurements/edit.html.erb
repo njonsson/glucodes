@@ -4,6 +4,11 @@
 
 <% form_for(@measurement) do |f| %>
   <p>
+    <b>At</b><br />
+    <%= f.datetime_select :at %>
+  </p>
+
+  <p>
     <b>Accounting date</b><br />
     <%= f.date_select :accounting_date %>
   </p>
