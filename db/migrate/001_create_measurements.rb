@@ -3,7 +3,7 @@ class CreateMeasurements < ActiveRecord::Migration
     create_table :measurements do |t|
       t.date    :accounting_date
       t.string  :accounting_time_period, :limit => 1
-      t.integer :value
+      t.integer :value, :null => false
 
       t.timestamps
     end

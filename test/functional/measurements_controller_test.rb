@@ -14,7 +14,7 @@ class MeasurementsControllerTest < ActionController::TestCase
 
   def test_should_create_measurement
     assert_difference('Measurement.count') do
-      post :create, :measurement => { }
+      post :create, :measurement => { :value => 100 }
     end
 
     assert_redirected_to measurement_path(assigns(:measurement))
