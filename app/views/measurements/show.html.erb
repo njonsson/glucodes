@@ -1,0 +1,18 @@
+<p>
+  <b>Accounting date:</b>
+  <%=h @measurement.accounting_date %>
+</p>
+
+<p>
+  <b>Accounting time period:</b>
+  <%=h @measurement.accounting_time_period %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%=h @measurement.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_measurement_path(@measurement) %> |
+<%= link_to 'Back', measurements_path %>

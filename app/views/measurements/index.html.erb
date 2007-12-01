@@ -1,0 +1,24 @@
+<h1>Listing measurements</h1>
+
+<table>
+  <tr>
+    <th>Accounting date</th>
+    <th>Accounting time period</th>
+    <th>Value</th>
+  </tr>
+
+<% for measurement in @measurements %>
+  <tr>
+    <td><%=h measurement.accounting_date %></td>
+    <td><%=h measurement.accounting_time_period %></td>
+    <td><%=h measurement.value %></td>
+    <td><%= link_to 'Show', measurement %></td>
+    <td><%= link_to 'Edit', edit_measurement_path(measurement) %></td>
+    <td><%= link_to 'Destroy', measurement, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New measurement', new_measurement_path %>
