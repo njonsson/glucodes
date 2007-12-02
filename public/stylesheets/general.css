@@ -1,0 +1,17 @@
+h1, h2, h3, h4, h5, h6, strong, b { font-weight: bold; }
+
+h1, h2, h3, h4, h5, h6 { margin: 0.5em 0; }
+
+h1 { font-size: 185%; }
+
+h2 { font-size: 170%; }
+
+h3 { font-size: 155%; }
+
+h4 { font-size: 140%; }
+
+h5 { font-size: 125%; }
+
+h6 { font-size: 110%; }
+
+em, i { font-style: italic; }
