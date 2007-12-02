@@ -15,3 +15,9 @@ h5 { font-size: 125%; }
 h6 { font-size: 110%; }
 
 em, i { font-style: italic; }
+
+.column-section { display: table; }
+
+.column-set { display: table-row; }
+
+.column { display: table-cell; }
