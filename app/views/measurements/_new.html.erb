@@ -1,0 +1,23 @@
+<%= error_messages_for :measurement %>
+
+<% form_for @measurement do |form| -%>
+<% label_width = '13em' -%>
+<dl>
+<dt style="width: <%= label_width %>;"><label for="measurement[at]">At:</label></dt>
+<dd><%= form.text_field :at, :size => 9 %></dd>
+
+<dt style="width: <%= label_width %>;"><label for="measurement[accounting_date]">Accounting date:</label></dt>
+<dd><%= form.text_field :accounting_date, :size => 9 %></dd>
+
+<dt style="width: <%= label_width %>;"><label for="measurement[accounting_time_period]">Accounting time period:</label></dt>
+<dd><%= form.text_field :accounting_time_period, :size => 1 %></dd>
+
+<dt style="width: <%= label_width %>;"><label for="measurement[value]">Value:</label></dt>
+<dd><%= form.text_field :value, :size => 3 %></dd>
+</dl>
+
+<ul class="links">
+<li><%= form.submit 'Create' %></li>
+<li><%= link_to 'Cancel', measurements_path %></li>
+</ul>
+<% end -%>

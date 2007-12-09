@@ -1,3 +1,5 @@
+body { margin: 2em; }
+
 h1, h2, h3, h4, h5, h6, strong, b { font-weight: bold; }
 
 h1, h2, h3, h4, h5, h6 { margin: 0.5em 0; }
@@ -16,8 +18,40 @@ h6 { font-size: 110%; }
 
 em, i { font-style: italic; }
 
+th { font-weight: bold; }
+
+th, th[align='center'] { text-align: center; }
+
+th[align='left'] { text-align: left; }
+
+th[align='right'] { text-align: right; }
+
+li
+{
+  display: list-item;
+  margin-left: 1em;
+}
+
+ol li { list-style: decimal inside; }
+
+ul li { list-style: disc outside; }
+
+.links li { display: inline; }
+
+dt { float: left; }
+
+form dt
+{
+  padding-right: 0.5em;
+  text-align:    right;
+}
+
 .column-section { display: table; }
 
 .column-set { display: table-row; }
 
-.column { display: table-cell; }
+.column
+{
+  display: table-cell;
+  padding: 0 2em 0 0;
+}
