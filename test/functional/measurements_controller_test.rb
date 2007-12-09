@@ -7,12 +7,6 @@ class MeasurementsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:measurements)
   end
 
-  def test_should_get_spreadsheet
-    get :spreadsheet
-    assert_response :success
-    assert_template 'spreadsheet'
-  end
-
   def test_should_get_new
     get :new
     assert_response :success
