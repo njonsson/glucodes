@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'mocha'
 
-class Measurement; end
+class Measurement < ActiveRecord::Base; end
 
 module MeasurementTest
 
@@ -14,7 +14,7 @@ module MeasurementTest
     
   end
   
-  class MissingAccountingDateWithMiddayAt < ActiveSupport::TestCase
+  class MissingAdjustedDateWithMiddayAt < ActiveSupport::TestCase
     
     def setup
       @at_string = '2007-12-09 15:37'
@@ -23,13 +23,13 @@ module MeasurementTest
       @measurement.save!
     end
     
-    def test_should_set_accounting_date_to_at_when_saved
-      assert_equal Time.parse(@at_string), @measurement.accounting_date
+    def test_should_set_adjusted_date_to_at_when_saved
+      assert_equal Time.parse(@at_string), @measurement.adjusted_date
     end
     
   end
   
-  class MissingAccountingDateWithMidnightAt < ActiveSupport::TestCase
+  class MissingAdjustedDateWithMidnightAt < ActiveSupport::TestCase
     
     def setup
       @measurement = Measurement.new(:at => '2007-12-09 00:44',
@@ -37,8 +37,8 @@ module MeasurementTest
       @measurement.save!
     end
     
-    def test_should_set_accounting_date_to_day_before_at_when_saved
-      assert_equal Time.parse('2007-12-08 00:44'), @measurement.accounting_date
+    def test_should_set_adjusted_date_to_day_before_at_when_saved
+      assert_equal Time.parse('2007-12-08 00:44'), @measurement.adjusted_date
     end
     
   end
