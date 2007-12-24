@@ -22,23 +22,23 @@ class MeasurementsControllerTest < ActionController::TestCase
   end
 
   def test_should_show_measurement
-    get :show, :id => 1
+    get :show, :id => measurements(:one).id
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 1
+    get :edit, :id => measurements(:one).id
     assert_response :success
   end
 
   def test_should_update_measurement
-    put :update, :id => 1, :measurement => { }
+    put :update, :id => measurements(:one).id, :measurement => { }
     assert_redirected_to measurement_path(assigns(:measurement))
   end
 
   def test_should_destroy_measurement
     assert_difference('Measurement.count', -1) do
-      delete :destroy, :id => 1
+      delete :destroy, :id => measurements(:one).id
     end
 
     assert_redirected_to measurements_path
