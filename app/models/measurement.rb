@@ -14,25 +14,41 @@
 
 class Measurement < ActiveRecord::Base
   
-  validates_presence_of :at, :value
+  attr_accessible :at, :value
   
-  before_save :set_time_attributes
+  validates_presence_of :at, :value
+  validates_length_of :time_period, :maximum => 1, :allow_nil => true
+  
+  before_save :set_adjusted_date_and_time_period
   
 private
   
-  def set_time_attributes
-    if adjusted_date.blank?
-      self.adjusted_date = (self.at.hour < 2) ? self.at.yesterday : self.at
-    end
-    if time_period.blank?
-      self.time_period = case self.at.hour
-                           when [2...6]:   'a'
-                           when [6...10]:  'b'
-                           when [10...14]: 'c'
-                           when [14...18]: 'd'
-                           when [18...22]: 'e'
-                           else            'f'
-                         end
+  def set_adjusted_date_and_time_period
+    case self.at.hour
+      when (0...5)
+        self.time_period = 'g'
+        self.adjusted_date = at.yesterday
+      when (5...8)
+        self.time_period = 'a'
+        self.adjusted_date = at
+      when (8...11)
+        self.time_period = 'b'
+        self.adjusted_date = at
+      when (11...14)
+        self.time_period = 'c'
+        self.adjusted_date = at
+      when (14...17)
+        self.time_period = 'd'
+        self.adjusted_date = at
+      when (17...20)
+        self.time_period = 'e'
+        self.adjusted_date = at
+      when (20...23)
+        self.time_period = 'f'
+        self.adjusted_date = at
+      else
+        self.time_period = 'g'
+        self.adjusted_date = at
     end
   end
   
