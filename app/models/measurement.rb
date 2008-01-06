@@ -18,6 +18,9 @@ class Measurement < ActiveRecord::Base
   
   validates_presence_of :at, :value
   validates_length_of :time_period, :maximum => 1, :allow_nil => true
+  validates_numericality_of :value, :only_integer => true,
+                                    :greater_than => 0,
+                                    :allow_nil => true
   
   before_save :set_adjusted_date_and_time_period
   
