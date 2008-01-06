@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 1
+#
+# Table name: measurements
+#
+#  id            :integer         not null, primary key
+#  at            :datetime        not null
+#  adjusted_date :date            
+#  time_period   :string(1)       
+#  value         :integer         not null
+#  created_at    :datetime        
+#  updated_at    :datetime        
+#
+
 class Measurement < ActiveRecord::Base
   
   validates_presence_of :at, :value
