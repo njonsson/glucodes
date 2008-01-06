@@ -3,13 +3,14 @@
 #
 # Table name: measurements
 #
-#  id            :integer         not null, primary key
-#  at            :datetime        not null
-#  adjusted_date :date            
-#  time_period   :string(1)       
-#  value         :integer         not null
-#  created_at    :datetime        
-#  updated_at    :datetime        
+#  id               :integer         not null, primary key
+#  at               :datetime        not null
+#  approximate_time :boolean         not null
+#  adjusted_date    :date            
+#  time_period      :string(1)       
+#  value            :integer         not null
+#  created_at       :datetime        
+#  updated_at       :datetime        
 #
 
 class Measurement < ActiveRecord::Base
@@ -17,6 +18,7 @@ class Measurement < ActiveRecord::Base
   attr_accessible :at, :value
   
   validates_presence_of :at, :value
+  validates_uniqueness_of :at, :allow_nil => true
   validates_length_of :time_period, :maximum => 1, :allow_nil => true
   validates_numericality_of :value, :only_integer => true,
                                     :greater_than => 0,

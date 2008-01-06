@@ -3,23 +3,24 @@
 #
 # Table name: measurements
 #
-#  id            :integer         not null, primary key
-#  at            :datetime        not null
-#  adjusted_date :date            
-#  time_period   :string(1)       
-#  value         :integer         not null
-#  created_at    :datetime        
-#  updated_at    :datetime        
+#  id               :integer         not null, primary key
+#  at               :datetime        not null
+#  approximate_time :boolean         not null
+#  adjusted_date    :date            
+#  time_period      :string(1)       
+#  value            :integer         not null
+#  created_at       :datetime        
+#  updated_at       :datetime        
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
-  at:            2007-11-30 22:53:30
+  at:            2007-11-30 22:53:29
   adjusted_date: 2007-11-30
   time_period:   f
   value:         100
 two:
-  at:            2007-11-30 22:53:30
+  at:            2007-11-30 22:53:31
   adjusted_date: 2007-11-30
   time_period:   f
   value:         100

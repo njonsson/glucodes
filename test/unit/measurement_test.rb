@@ -12,6 +12,11 @@ module MeasurementTest
       load 'app/models/measurement.rb'
     end
     
+    def test_should_validate_uniqueness_of_at
+      Measurement.expects(:validates_uniqueness_of).with :at, :allow_nil => true
+      load 'app/models/measurement.rb'
+    end
+    
     def test_should_validate_length_of_time_period
       Measurement.expects(:validates_length_of).with :time_period,
                                                      :maximum => 1,
