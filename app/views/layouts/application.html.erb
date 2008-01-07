@@ -8,9 +8,13 @@
 <%= stylesheet_link_tag 'general' %>
 </head>
 <body>
-<p style="color: green"><%= flash[:notice] %></p>
+<% if flash[:notice] -%>
+<p style="color: green;"><%= flash[:notice] %></p>
+<% end -%>
+<% if flash[:warning] -%>
+<p style="color: orange;"><%= flash[:warning] %></p>
+<% end -%>
 
-<%= yield  %>
-
+<%= yield -%>
 </body>
 </html>

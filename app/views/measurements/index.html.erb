@@ -63,12 +63,19 @@
 <thead>
 <tr>
 <th />
+
 <th align="right">Adjusted date</th>
+
 <th align="right">High</th>
+
 <th align="right">Low</th>
+
 <th align="right">Average</th>
+
 <th align="right">Count</th>
+
 <th colspan="2">Risk</th>
+
 <th colspan="10">Individual Blood-Glucose Measurements</th>
 </tr>
 </thead>
@@ -79,6 +86,7 @@
 <td>
 <ul class="links">
 <li><%= link_to 'Edit', edit_measurement_path(measurement) %></li>
+
 <li><%= link_to 'Delete', measurement, :confirm => 'Are you sure?', :method => :delete %></li>
 </ul>
 </td>
@@ -117,11 +125,13 @@
 
 <td align="right"></td>
 </tr>
+
 <% end -%>
 </tbody>
 </table>
 <% end -%>
 
+<%= will_paginate @measurements -%>
 <ul class="links">
 <li><%= link_to 'New', new_measurement_path %></li>
 </ul>

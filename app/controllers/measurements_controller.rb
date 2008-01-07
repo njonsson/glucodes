@@ -2,7 +2,7 @@ class MeasurementsController < ApplicationController
   # GET /measurements
   # GET /measurements.xml
   def index
-    @measurements = Measurement.find(:all)
+    @measurements = Measurement.paginate(:page => params[:page] || 1)
 
     respond_to do |format|
       format.html # index.html.erb
