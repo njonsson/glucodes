@@ -17,9 +17,12 @@ module MeasurementTest
       load 'app/models/measurement.rb'
     end
     
-    def test_should_validate_length_of_time_period
+    def test_should_validate_length_of_time_period_and_notes
       Measurement.expects(:validates_length_of).with :time_period,
                                                      :maximum => 1,
+                                                     :allow_nil => true
+      Measurement.expects(:validates_length_of).with :notes,
+                                                     :maximum => 255,
                                                      :allow_nil => true
       load 'app/models/measurement.rb'
     end

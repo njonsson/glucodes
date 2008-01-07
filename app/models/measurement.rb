@@ -9,6 +9,7 @@
 #  adjusted_date    :date            
 #  time_period      :string(1)       
 #  value            :integer         not null
+#  notes            :string(255)     
 #  created_at       :datetime        
 #  updated_at       :datetime        
 #
@@ -23,6 +24,7 @@ class Measurement < ActiveRecord::Base
   validates_numericality_of :value, :only_integer => true,
                                     :greater_than => 0,
                                     :allow_nil => true
+  validates_length_of :notes, :maximum => 255, :allow_nil => true
   
   before_save :set_adjusted_date_and_time_period
   

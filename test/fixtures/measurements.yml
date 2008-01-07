@@ -9,6 +9,7 @@
 #  adjusted_date    :date            
 #  time_period      :string(1)       
 #  value            :integer         not null
+#  notes            :string(255)     
 #  created_at       :datetime        
 #  updated_at       :datetime        
 #

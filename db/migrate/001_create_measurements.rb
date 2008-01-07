@@ -6,6 +6,7 @@ class CreateMeasurements < ActiveRecord::Migration
       t.date     :adjusted_date
       t.string   :time_period, :limit => 1
       t.integer  :value, :null => false
+      t.string   :notes
       t.timestamps
     end
   end
