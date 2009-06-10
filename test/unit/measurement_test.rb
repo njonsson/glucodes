@@ -56,7 +56,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_day_before_at_when_saved
-        assert_equal Time.parse('2007-12-08 4:59:59'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-08 4:59:59 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_g_when_saved
@@ -73,7 +74,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 5:00'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 5:00 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_a_when_saved
@@ -90,7 +92,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 7:59:59'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 7:59:59 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_a_when_saved
@@ -107,7 +110,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 8:00'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 8:00 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_b_when_saved
@@ -125,7 +129,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 10:59:59'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 10:59:59 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_b_when_saved
@@ -142,7 +147,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 11:00'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 11:00 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_c_when_saved
@@ -160,7 +166,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 13:59:59'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 13:59:59 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_c_when_saved
@@ -177,7 +184,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 14:00'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 14:00 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_d_when_saved
@@ -195,7 +203,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 16:59:59'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 16:59:59 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_d_when_saved
@@ -212,7 +221,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 17:00'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 17:00 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_e_when_saved
@@ -230,7 +240,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 19:59:59'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 19:59:59 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_e_when_saved
@@ -247,7 +258,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 20:00'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 20:00 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_f_when_saved
@@ -265,7 +277,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 22:59:59'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 22:59:59 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_f_when_saved
@@ -282,7 +295,8 @@ module MeasurementTest
       end
       
       def test_should_set_adjusted_date_to_at_when_saved
-        assert_equal Time.parse('2007-12-09 23:00'), @measurement.adjusted_date
+        assert_equal Time.parse('2007-12-09 23:00 UTC'),
+                     @measurement.adjusted_date
       end
       
       def test_should_set_time_period_to_g_when_saved
