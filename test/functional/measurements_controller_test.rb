@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class MeasurementsControllerTest < ActionController::TestCase
+  fixtures :measurements
+
   test 'should get index' do
     get :index
     assert_response :success
