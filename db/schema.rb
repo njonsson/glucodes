@@ -14,8 +14,8 @@ ActiveRecord::Schema.define(:version => 1) do
   create_table "measurements", :force => true do |t|
     t.datetime "at",                                               :null => false
     t.boolean  "approximate_time",              :default => false, :null => false
-    t.date     "adjusted_date"
-    t.string   "time_period",      :limit => 1
+    t.date     "adjusted_date",                                    :null => false
+    t.string   "time_period",      :limit => 1,                    :null => false
     t.integer  "value",                                            :null => false
     t.string   "notes"
     t.datetime "created_at"

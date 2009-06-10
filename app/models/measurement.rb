@@ -6,8 +6,8 @@
 #  id               :integer         not null, primary key
 #  at               :datetime        not null
 #  approximate_time :boolean         not null
-#  adjusted_date    :date            
-#  time_period      :string(1)       
+#  adjusted_date    :date            not null
+#  time_period      :string(1)       not null
 #  value            :integer         not null
 #  notes            :string(255)     
 #  created_at       :datetime        
