@@ -84,13 +84,15 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
 "1828","06/08/2009","12:30:00","160","RGQ85C6BV","2","10","-1","0","3","","7","3","","","2","0"
       end_data
       @importer.import data
-      measurement1 = Measurement.all.first
-      assert_equal Time.parse('2009-06-08 20:31 UTC'), measurement1.at
-      assert_equal 343,                                measurement1.value
-      measurement2 = Measurement.all.last
-      assert_equal Time.parse('2009-06-08 12:30 UTC'), measurement2.at
-      assert_equal 160,                                measurement2.value
     end
+    
+    measurement1 = Measurement.all.first
+    assert_equal Time.parse('2009-06-08 20:31 UTC'), measurement1.at
+    assert_equal 343,                                measurement1.value
+    
+    measurement2 = Measurement.all.last
+    assert_equal Time.parse('2009-06-08 12:30 UTC'), measurement2.at
+    assert_equal 160,                                measurement2.value
   end
   
 end
