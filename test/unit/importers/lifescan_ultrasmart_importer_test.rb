@@ -25,7 +25,7 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
   
   test 'should not create measurements when the header is missing' do
     assert_no_difference 'Measurement.count' do
-      @importer.import <<-end_data
+      @importer.import! <<-end_data
 "1829","06/08/2009","20:31:00","343","RGQ85C6BV","2","10","-1","0","6","","7","3","","","1","0"
 "1828","06/08/2009","12:30:00","160","RGQ85C6BV","2","10","-1","0","3","","7","3","","","2","0"
       end_data
@@ -34,7 +34,7 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
   
   test 'should raise expected error if date format is unsupported' do
     assert_raise Importers::UnsupportedDateFormatError do
-      @importer.import <<-end_data
+      @importer.import! <<-end_data
 "OneTouch (R) Diabetes Management Software v2.3.2 P1/V2.3.2 01.23.08"
 "1033 , 1033"
 "mg/dL"
@@ -45,7 +45,7 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
   
   test 'should raise expected error if time format is unsupported' do
     assert_raise Importers::UnsupportedTimeFormatError do
-      @importer.import <<-end_data
+      @importer.import! <<-end_data
 "OneTouch (R) Diabetes Management Software v2.3.2 P1/V2.3.2 01.23.08"
 "1033 , 1033"
 "mg/dL"
@@ -58,7 +58,7 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
   test "should raise expected error and not create measurements when record count is incorrect" do
     assert_no_difference 'Measurement.count' do
       assert_raise Importers::ConflictingRecordCountError do
-        @importer.import <<-end_data
+        @importer.import! <<-end_data
 "OneTouch (R) Diabetes Management Software v2.3.2 P1/V2.3.2 01.23.08"
 "1033 , 1033"
 "mg/dL"
@@ -73,7 +73,7 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
   
   test 'should not create measurements when importing zero records' do
     assert_no_difference 'Measurement.count' do
-      @importer.import add_header_to(nil)
+      @importer.import! add_header_to(nil)
     end
   end
   
@@ -83,7 +83,7 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
 "1829","06/08/2009","20:31:00","343","RGQ85C6BV","2","10","-1","0","6","","7","3","","","1","0"
 "1828","06/08/2009","12:30:00","160","RGQ85C6BV","2","10","-1","0","3","","7","3","","","2","0"
       end_data
-      @importer.import data
+      @importer.import! data
     end
     
     measurement1 = Measurement.all.first
@@ -103,7 +103,7 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
 "1827","06/08/2009","10:07:00","263","RGQ85C6BV","","30","-1","0","2","","7","3","","","3","0"
 "1826","06/08/2009","07:22:00","66","RGQ85C6BV","2","10","-1","0","1","","7","3","","","4","0"
       end_data
-      @importer.import data
+      @importer.import! data
     end
     
     measurement1 = Measurement.all.first

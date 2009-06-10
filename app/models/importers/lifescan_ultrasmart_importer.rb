@@ -8,7 +8,7 @@ class Importers::LifescanUltrasmartImporter
   MEASUREMENTS_COUNT_PATTERN = /^Total Number of Readings in Data File: (\d+)$/
   TIME_FORMAT_PATTERN        = /^Time Format : (.+)$/
   
-  def import(data)
+  def import!(data)
     pointer             = 0
     date_format_checked = false
     time_format_checked = false
