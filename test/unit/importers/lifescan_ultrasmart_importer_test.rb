@@ -55,7 +55,7 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
     end
   end
   
-  test "should raise expected error and not create measurements when record count is incorrect" do
+  test 'should raise expected error and not create measurements when record count is incorrect' do
     assert_no_difference 'Measurement.count' do
       assert_raise Importers::ConflictingRecordCountError do
         @importer.import! <<-end_data
