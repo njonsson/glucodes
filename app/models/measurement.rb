@@ -1,19 +1,3 @@
-# == Schema Information
-# Schema version: 1
-#
-# Table name: measurements
-#
-#  id               :integer         not null, primary key
-#  at               :datetime        not null
-#  approximate_time :boolean         not null
-#  adjusted_date    :date            not null
-#  time_period      :string(1)       not null
-#  value            :integer         not null
-#  notes            :string(255)     
-#  created_at       :datetime        
-#  updated_at       :datetime        
-#
-
 class Measurement < ActiveRecord::Base
   
   attr_accessible :at, :value
