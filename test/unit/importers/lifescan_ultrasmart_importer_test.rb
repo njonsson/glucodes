@@ -95,4 +95,20 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
     assert_equal 160,                                measurement2.value
   end
   
+  test 'should only create valid measurements when importing four records' do
+    assert_difference 'Measurement.count' do
+      data = add_header_to <<-end_data
+"1829","06/08/2009","20:31:00","343","RGQ85C6BV","","10","-1","0","6","","7","3","","","1","0"
+"1828","06/08/2009","12:30:00","160","RGQ85C6BV","2","30","-1","0","3","","7","3","","","2","0"
+"1827","06/08/2009","10:07:00","263","RGQ85C6BV","","30","-1","0","2","","7","3","","","3","0"
+"1826","06/08/2009","07:22:00","66","RGQ85C6BV","2","10","-1","0","1","","7","3","","","4","0"
+      end_data
+      @importer.import data
+    end
+    
+    measurement1 = Measurement.all.first
+    assert_equal Time.parse('2009-06-08 07:22 UTC'), measurement1.at
+    assert_equal 66,                                 measurement1.value
+  end
+  
 end
