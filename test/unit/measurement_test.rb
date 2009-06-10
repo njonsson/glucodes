@@ -46,7 +46,7 @@ module MeasurementTest
     
   end
   
-  module AdjustedDateAndTimePeriod
+  module AdjustedDatesAndTimePeriod
     
     class With045959At < ActiveSupport::TestCase
       
@@ -58,6 +58,11 @@ module MeasurementTest
       def test_should_set_adjusted_date_to_day_before_at_when_saved
         assert_equal Time.parse('2007-12-08 4:59:59 UTC'),
                      @measurement.adjusted_date
+      end
+      
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
       end
       
       def test_should_set_time_period_to_g_when_saved
@@ -78,6 +83,11 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
+      end
+      
       def test_should_set_time_period_to_a_when_saved
         assert_equal 'a', @measurement.time_period
       end
@@ -96,6 +106,11 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
+      end
+      
       def test_should_set_time_period_to_a_when_saved
         assert_equal 'a', @measurement.time_period
       end
@@ -112,6 +127,11 @@ module MeasurementTest
       def test_should_set_adjusted_date_to_at_when_saved
         assert_equal Time.parse('2007-12-09 8:00 UTC'),
                      @measurement.adjusted_date
+      end
+      
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
       end
       
       def test_should_set_time_period_to_b_when_saved
@@ -133,6 +153,11 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
+      end
+      
       def test_should_set_time_period_to_b_when_saved
         assert_equal 'b', @measurement.time_period
       end
@@ -149,6 +174,11 @@ module MeasurementTest
       def test_should_set_adjusted_date_to_at_when_saved
         assert_equal Time.parse('2007-12-09 11:00 UTC'),
                      @measurement.adjusted_date
+      end
+      
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
       end
       
       def test_should_set_time_period_to_c_when_saved
@@ -170,6 +200,11 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
+      end
+      
       def test_should_set_time_period_to_c_when_saved
         assert_equal 'c', @measurement.time_period
       end
@@ -186,6 +221,11 @@ module MeasurementTest
       def test_should_set_adjusted_date_to_at_when_saved
         assert_equal Time.parse('2007-12-09 14:00 UTC'),
                      @measurement.adjusted_date
+      end
+      
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
       end
       
       def test_should_set_time_period_to_d_when_saved
@@ -207,6 +247,11 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
+      end
+      
       def test_should_set_time_period_to_d_when_saved
         assert_equal 'd', @measurement.time_period
       end
@@ -223,6 +268,11 @@ module MeasurementTest
       def test_should_set_adjusted_date_to_at_when_saved
         assert_equal Time.parse('2007-12-09 17:00 UTC'),
                      @measurement.adjusted_date
+      end
+      
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
       end
       
       def test_should_set_time_period_to_e_when_saved
@@ -244,6 +294,11 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
+      end
+      
       def test_should_set_time_period_to_e_when_saved
         assert_equal 'e', @measurement.time_period
       end
@@ -260,6 +315,11 @@ module MeasurementTest
       def test_should_set_adjusted_date_to_at_when_saved
         assert_equal Time.parse('2007-12-09 20:00 UTC'),
                      @measurement.adjusted_date
+      end
+      
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
       end
       
       def test_should_set_time_period_to_f_when_saved
@@ -281,6 +341,11 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
+      end
+      
       def test_should_set_time_period_to_f_when_saved
         assert_equal 'f', @measurement.time_period
       end
@@ -297,6 +362,11 @@ module MeasurementTest
       def test_should_set_adjusted_date_to_at_when_saved
         assert_equal Time.parse('2007-12-09 23:00 UTC'),
                      @measurement.adjusted_date
+      end
+      
+      def test_should_set_adjusted_end_of_quarter_date_to_end_of_quarter_for_adjusted_date_when_saved
+        assert_equal Time.parse('2007-12-31 23:59:59 UTC'),
+                     @measurement.adjusted_end_of_quarter_date
       end
       
       def test_should_set_time_period_to_g_when_saved

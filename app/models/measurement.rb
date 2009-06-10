@@ -10,11 +10,11 @@ class Measurement < ActiveRecord::Base
                                     :allow_nil => true
   validates_length_of :notes, :maximum => 255, :allow_nil => true
   
-  before_save :set_adjusted_date_and_time_period
+  before_save :set_adjusted_dates_and_time_period
   
 private
   
-  def set_adjusted_date_and_time_period
+  def set_adjusted_dates_and_time_period
     case self.at.hour
       when (0...5)
         self.time_period = 'g'
@@ -41,6 +41,7 @@ private
         self.time_period = 'g'
         self.adjusted_date = at
     end
+    self.adjusted_end_of_quarter_date = adjusted_date.end_of_quarter
   end
   
 end
