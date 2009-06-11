@@ -23,4 +23,9 @@ ActiveRecord::Schema.define(:version => 1) do
     t.datetime "updated_at"
   end
 
+  add_index "measurements", ["adjusted_date"], :name => "index_measurements_on_adjusted_date"
+  add_index "measurements", ["adjusted_end_of_quarter_date"], :name => "index_measurements_on_adjusted_end_of_quarter_date"
+  add_index "measurements", ["at"], :name => "index_measurements_on_at"
+  add_index "measurements", ["time_period"], :name => "index_measurements_on_time_period"
+
 end

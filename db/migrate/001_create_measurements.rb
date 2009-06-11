@@ -10,6 +10,11 @@ class CreateMeasurements < ActiveRecord::Migration
       t.string   :notes
       t.timestamps
     end
+
+    add_index :measurements, :at
+    add_index :measurements, :adjusted_date
+    add_index :measurements, :adjusted_end_of_quarter_date
+    add_index :measurements, :time_period
   end
 
   def self.down
