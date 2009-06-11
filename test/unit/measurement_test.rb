@@ -1,46 +1,126 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'mocha'
-
-class Measurement < ActiveRecord::Base; end
 
 module MeasurementTest
   
-  class Validations < ActiveSupport::TestCase
+  class MissingAtAndValue < ActiveSupport::TestCase
     
-    test 'should validate presence of at and value' do
-      Measurement.expects(:validates_presence_of).with :at, :value
-      load 'app/models/measurement.rb'
+    def setup
+      @measurement = Measurement.new
+      @measurement.valid?
     end
     
-    test 'should validate uniqueness of at' do
-      Measurement.expects(:validates_uniqueness_of).with :at, :allow_nil => true
-      load 'app/models/measurement.rb'
+    test 'should have presence validation error on at' do
+      assert_equal "can't be blank", @measurement.errors.on(:at)
     end
     
-    test 'should validate length of time_period and notes' do
-      Measurement.expects(:validates_length_of).with :time_period,
-                                                     :maximum => 1,
-                                                     :allow_nil => true
-      Measurement.expects(:validates_length_of).with :notes,
-                                                     :maximum => 255,
-                                                     :allow_nil => true
-      load 'app/models/measurement.rb'
-    end
-    
-    test 'should validate numericality of value' do
-      Measurement.expects(:validates_numericality_of).with :value,
-                                                           :greater_than => 0,
-                                                           :allow_nil => true
-      load 'app/models/measurement.rb'
+    test 'should have presence validation error on value' do
+      assert_equal "can't be blank", @measurement.errors.on(:value)
     end
     
   end
   
+  class WithNonuniqueAt < ActiveSupport::TestCase
+    
+    def setup
+      Measurement.create! :at => '2009-06-10 20:49', :value => 100
+      @measurement = Measurement.new(:at => '2009-06-10 20:49')
+      @measurement.valid?
+    end
+    
+    test 'should have uniqueness validation error on at' do
+      assert_equal 'has already been taken', @measurement.errors.on(:at)
+    end
+    
+  end
+  
+  class WithNonnumericValue < ActiveSupport::TestCase
+    
+    def setup
+      @measurement = Measurement.new(:value => 'foo')
+      @measurement.valid?
+    end
+    
+    test 'should have numericality validation error on value' do
+      assert_equal 'is not a number', @measurement.errors.on(:value)
+    end
+    
+  end
+  
+  class WithZeroValue < ActiveSupport::TestCase
+    
+    def setup
+      @measurement = Measurement.new(:value => 0)
+      @measurement.valid?
+    end
+    
+    test 'should have numericality range validation error on value' do
+      assert_equal 'must be greater than 0', @measurement.errors.on(:value)
+    end
+    
+  end
+  
+  class WithLongNotes < ActiveSupport::TestCase
+  
+    def setup
+      @measurement = Measurement.new(:notes => 'a' * 257)
+      @measurement.valid?
+    end
+  
+    test 'should have length validation error on value' do
+      assert_equal 'is too long (maximum is 255 characters)',
+                   @measurement.errors.on(:notes)
+    end
+  
+  end
+  
   class Protections < ActiveSupport::TestCase
     
-    test 'should make accessible at and value' do
-      Measurement.expects(:attr_accessible).with :at, :value
-      load 'app/models/measurement.rb'
+    test 'should protect id' do
+      assert_nil Measurement.new(:id => 123).id
+    end
+    
+    test 'should not protect at' do
+      time = Time.parse('2009-06-10 22:49 UTC')
+      assert_equal time, Measurement.new(:at => time).at
+    end
+    
+    test 'should not protect approximate_time' do
+      assert_equal true,
+                   Measurement.new(:approximate_time => true).approximate_time
+      assert_equal false,
+                   Measurement.new(:approximate_time => false).approximate_time
+    end
+    
+    test 'should protect adjusted_date' do
+      assert_nil Measurement.new(:adjusted_date => '2009-06-10').adjusted_date
+    end
+    
+    test 'should protect adjusted_end_of_quarter_date' do
+      assert_nil Measurement.new(:adjusted_end_of_quarter_date => '2009-06-10').adjusted_end_of_quarter_date
+    end
+    
+    test 'should protect time_period' do
+      assert_nil Measurement.new(:time_period => 'a').time_period
+    end
+    
+    test 'should not protect value' do
+      assert_equal 123, Measurement.new(:value => 123).value
+    end
+    
+    test 'should protect skew' do
+      assert_nil Measurement.new(:skew => 0.5).skew
+    end
+    
+    test 'should not protect notes' do
+      assert_equal 'foo', Measurement.new(:notes => 'foo').notes
+    end
+    
+    test 'should protect created_at' do
+      assert_nil Measurement.new(:created_at => '2009-06-10').created_at
+    end
+    
+    test 'should protect updated_at' do
+      assert_nil Measurement.new(:updated_at => '2009-06-10').updated_at
     end
     
   end

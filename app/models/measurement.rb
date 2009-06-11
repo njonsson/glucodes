@@ -1,12 +1,11 @@
 class Measurement < ActiveRecord::Base
   
-  attr_accessible :at, :value
+  attr_accessible :at, :value, :approximate_time, :notes
   
   validates_presence_of :at, :value
-  validates_uniqueness_of :at, :allow_nil => true
-  validates_length_of :time_period, :maximum => 1, :allow_nil => true
-  validates_numericality_of :value, :greater_than => 0, :allow_nil => true
-  validates_length_of :notes, :maximum => 255, :allow_nil => true
+  validates_uniqueness_of :at, :allow_blank => true
+  validates_numericality_of :value, :greater_than => 0, :allow_blank => true
+  validates_length_of :notes, :maximum => 255, :allow_blank => true
   
   before_save :set_adjusted_dates_and_time_period_and_skew
   
