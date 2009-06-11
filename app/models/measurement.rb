@@ -5,16 +5,14 @@ class Measurement < ActiveRecord::Base
   validates_presence_of :at, :value
   validates_uniqueness_of :at, :allow_nil => true
   validates_length_of :time_period, :maximum => 1, :allow_nil => true
-  validates_numericality_of :value, :only_integer => true,
-                                    :greater_than => 0,
-                                    :allow_nil => true
+  validates_numericality_of :value, :greater_than => 0, :allow_nil => true
   validates_length_of :notes, :maximum => 255, :allow_nil => true
   
-  before_save :set_adjusted_dates_and_time_period
+  before_save :set_adjusted_dates_and_time_period_and_skew
   
 private
   
-  def set_adjusted_dates_and_time_period
+  def set_adjusted_dates_and_time_period_and_skew
     case self.at.hour
       when (0...5)
         self.time_period = 'g'
@@ -42,6 +40,7 @@ private
         self.adjusted_date = at
     end
     self.adjusted_end_of_quarter_date = adjusted_date.end_of_quarter
+    self.skew = 1.0 - ((value / 100.0) ** ((value <= 100.0) ? 1.0 : -1.0));
   end
   
 end

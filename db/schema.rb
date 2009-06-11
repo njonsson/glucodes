@@ -17,7 +17,8 @@ ActiveRecord::Schema.define(:version => 1) do
     t.date     "adjusted_date",                                                :null => false
     t.date     "adjusted_end_of_quarter_date",                                 :null => false
     t.string   "time_period",                  :limit => 1,                    :null => false
-    t.integer  "value",                                                        :null => false
+    t.float    "value",                                                        :null => false
+    t.float    "skew",                                                         :null => false
     t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -29,7 +29,6 @@ module MeasurementTest
     
     test 'should validate numericality of value' do
       Measurement.expects(:validates_numericality_of).with :value,
-                                                           :only_integer => true,
                                                            :greater_than => 0,
                                                            :allow_nil => true
       load 'app/models/measurement.rb'
@@ -329,6 +328,75 @@ module MeasurementTest
       test 'should set adjusted_end_of_quarter_date to end of Q2 for adjusted_date when saved' do
         assert_equal Time.parse('2009-06-30 23:59:59 UTC'),
                      @measurement.adjusted_end_of_quarter_date
+      end
+      
+    end
+    
+  end
+  
+  module Skew
+    
+    class With50Value < ActiveSupport::TestCase
+      
+      def setup
+        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 50)
+        @measurement.save!
+      end
+      
+      test 'should set skew to 0.5 when saved' do
+        assert_equal '0.5', @measurement.skew.to_s
+      end
+      
+    end
+    
+    class With80Value < ActiveSupport::TestCase
+      
+      def setup
+        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 80)
+        @measurement.save!
+      end
+      
+      test 'should set skew to 0.2 when saved' do
+        assert_equal '0.2', @measurement.skew.to_s
+      end
+      
+    end
+    
+    class With100Value < ActiveSupport::TestCase
+      
+      def setup
+        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 100)
+        @measurement.save!
+      end
+      
+      test 'should set skew to 0.0 when saved' do
+        assert_equal '0.0', @measurement.skew.to_s
+      end
+      
+    end
+    
+    class With125Value < ActiveSupport::TestCase
+      
+      def setup
+        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 125)
+        @measurement.save!
+      end
+      
+      test 'should set skew to 0.2 when saved' do
+        assert_equal '0.2', @measurement.skew.to_s
+      end
+      
+    end
+    
+    class With200Value < ActiveSupport::TestCase
+      
+      def setup
+        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 200)
+        @measurement.save!
+      end
+      
+      test 'should set skew to 0.5 when saved' do
+        assert_equal '0.5', @measurement.skew.to_s
       end
       
     end
