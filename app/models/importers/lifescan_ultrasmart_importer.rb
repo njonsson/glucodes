@@ -52,9 +52,9 @@ class Importers::LifescanUltrasmartImporter
 private
   
   def extract_measurement(cells)
-    integer_pattern = /^(\d+)$/
+    integer_pattern = /^\d+$/
     date_pattern    = /^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/
-    time_pattern    = /^(\d{2,2}):(\d{2,2}):(\d{2,2})$/
+    time_pattern    = /^\d{2,2}:\d{2,2}:\d{2,2}$/
     return nil unless cells[0] =~ integer_pattern
     return nil unless cells[1] =~ date_pattern
     return nil unless cells[2] =~ time_pattern
@@ -62,8 +62,8 @@ private
     return :not_a_measurement unless cells[5] =~ integer_pattern
     return :not_a_measurement unless cells[6] == '10'
     Measurement.new :at => cells[1].gsub(date_pattern, '\3-\1-\2') + ' ' +
-                           cells[2].gsub(time_pattern, '\1:\2:\3'),
-                    :value => cells[3].gsub(integer_pattern, '\1')
+                           cells[2],
+                    :value => cells[3]
   end
   
   def extract_measurements_count(cell)
