@@ -95,7 +95,7 @@ class Importers::LifescanUltrasmartImporterTest < ActiveSupport::TestCase
     assert_equal 160,                                measurement2.value
   end
   
-  test 'should only create valid measurements when importing four records' do
+  test 'should only import valid measurements among valid and invalid records' do
     assert_difference 'Measurement.count' do
       data = add_header_to <<-end_data
 "1829","06/08/2009","20:31:00","343","RGQ85C6BV","","10","-1","0","6","","7","3","","","1","0"
