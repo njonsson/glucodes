@@ -1,6 +1,6 @@
 module Importers; end
 
-class Importers::UnsupportedFormatError < RuntimeError
+class Importers::UnsupportedFormatError < RuntimeError # :nodoc:
   
 protected
   

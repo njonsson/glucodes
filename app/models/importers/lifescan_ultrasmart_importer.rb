@@ -1,13 +1,21 @@
+# Defines Importers::LifescanUltrasmartImporter.
+
 require 'csv'
 
 module Importers; end
 
+# Creates Measurement resources from the records in a data file exported from
+# a LifeScan OneTouch UltraSmart glucose meter via LifeScan's OneTouch Diabetes
+# Management application.
 class Importers::LifescanUltrasmartImporter
   
-  DATE_FORMAT_PATTERN        = /^Date Format : (.+)$/
-  MEASUREMENTS_COUNT_PATTERN = /^Total Number of Readings in Data File: (\d+)$/
-  TIME_FORMAT_PATTERN        = /^Time Format : (.+)$/
+  DATE_FORMAT_PATTERN        = /^Date Format : (.+)$/                           # :nodoc:
+  MEASUREMENTS_COUNT_PATTERN = /^Total Number of Readings in Data File: (\d+)$/ # :nodoc:
+  TIME_FORMAT_PATTERN        = /^Time Format : (.+)$/                           # :nodoc:
   
+  # Create Measurement resources from the specified import file _data_. Creation
+  # of model objects is done transactionally, so if an error occurs then no
+  # objects are created.
   def import!(data)
     pointer             = 0
     date_format_checked = false

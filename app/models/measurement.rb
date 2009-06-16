@@ -1,3 +1,6 @@
+# Defines Measurement.
+
+# Represents an individual glucose measurement.
 class Measurement < ActiveRecord::Base
   
   attr_accessible :at, :value, :approximate_time, :notes

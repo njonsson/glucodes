@@ -1,9 +1,16 @@
+# Defines Importers::HealthengageImporter.
+
 require 'csv'
 
 module Importers; end
 
+# Creates Measurement resources from the records in a data file exported from
+# HealthEngage.net.
 class Importers::HealthengageImporter
   
+  # Create Measurement resources from the specified import file _data_. Creation
+  # of model objects is done transactionally, so if an error occurs then no
+  # objects are created.
   def import!(data)
     pointer        = 0
     header_checked = false
