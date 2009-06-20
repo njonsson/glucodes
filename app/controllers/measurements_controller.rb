@@ -6,6 +6,11 @@ class MeasurementsController < ApplicationController
   def index
     @measurements = Measurement.paginate(options_for_paginate)
     
+    if request.xhr?
+      render :partial => 'measurements', :object => @measurements
+      return
+    end
+    
     respond_to do |format|
       format.html # index.html.haml
     end
