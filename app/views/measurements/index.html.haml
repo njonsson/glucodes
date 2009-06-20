@@ -1,0 +1,54 @@
+/ BEGIN measurements/index.html.haml
+
+- content_for :page_title do
+  = 'Measurements'
+
+.data
+  %table
+    %thead
+      %tr
+        %th{'align' => 'right'}
+          Date/Time
+        
+        %th{'align' => 'center'}
+          Approximate Time?
+        
+        %th{'align' => 'right'}
+          Adjusted Date
+        
+        %th{'align' => 'center'}
+          Time Period
+        
+        %th{'align' => 'right'}
+          Value
+        
+        %th{'align' => 'right'}
+          Skew
+    
+    %tbody
+      - @measurements.each do |m|
+        %tr
+          %td{'align' => 'right'}
+            = m.at.to_formatted_s(:db)
+          
+          %td{'align' => 'center'}
+            = m.approximate_time ? 'Yes' : ''
+          
+          %td{'align' => 'right'}
+            = m.adjusted_date.to_formatted_s(:db)
+          
+          %td{'align' => 'center'}
+            = m.time_period
+          
+          %td{'align' => 'right'}
+            = m.value.round
+          
+          %td{'align' => 'right'}
+            = m.skew.round(1)
+  
+  = will_paginate @measurements, :inner_window => 1
+
+= content_for :additional_javascripts do
+  = javascript_include_tag 'measurements/index.js'
+
+/ END measurements/index.html.haml

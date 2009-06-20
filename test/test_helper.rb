@@ -35,4 +35,29 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def create_measurements!(count)
+    count.times do
+      m = Measurement.new(:at => random_time, :value => random_glucose_value)
+      unless m.valid?
+        redo if m.errors.on(:at)
+      end
+      m.save!
+    end
+  end
+
+private
+
+  def random_time
+    rand(10).years.until(
+      rand(12).months.until(
+        rand(31).days.until(
+          rand(24).hours.until(
+            rand(60).minutes.until(
+              rand(60).seconds.ago)))))
+  end
+  
+  def random_glucose_value
+    rand(200) + 50
+  end
 end

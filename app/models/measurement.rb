@@ -12,6 +12,8 @@ class Measurement < ActiveRecord::Base
   
   before_save :set_adjusted_dates_and_time_period_and_skew
   
+  default_scope :order => 'at DESC'
+  
 private
   
   def set_adjusted_dates_and_time_period_and_skew
