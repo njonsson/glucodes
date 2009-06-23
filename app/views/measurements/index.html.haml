@@ -1,12 +1,15 @@
 / BEGIN measurements/index.html.haml
 
 - content_for :page_title do
-  = 'Measurements'
+  Measurements
+
+%h1<
+  Measurements
 
 .content
   = render :partial => 'measurements', :object => 'measurements'
 
-= content_for :additional_javascripts do
+- content_for :additional_javascripts do
   = javascript_include_tag 'measurements/index.js'
 
 / END measurements/index.html.haml

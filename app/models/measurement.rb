@@ -14,6 +14,13 @@ class Measurement < ActiveRecord::Base
   
   default_scope :order => 'at DESC'
   
+  def severity
+    rounded_skew = skew.round(2)
+    return nil       if (rounded_skew < 0.20)
+    return :moderate if ((0.20 <= rounded_skew) && (rounded_skew <= 0.40))
+    :critical
+  end
+  
 private
   
   def set_adjusted_dates_and_time_period_and_skew

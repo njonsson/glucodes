@@ -6,9 +6,12 @@
   %head
     %meta{'http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8'}
     
-    - page_title_segments = Array(yield(:page_title)) + ['Glucodes']
-    %title= page_title_segments.join ' :: '
+    - page_title_segments = Array(yield(:page_title).chomp) + ['Glucodes']
+    %title<
+      = page_title_segments.join ' :: '
     
+    = stylesheet_link_tag 'reset-min'
+    = stylesheet_link_tag 'general'
     - Array(yield(:additional_stylesheets)).each do |s|
       = stylesheet_link_tag s
     - if (page_style = yield(:page_style))
@@ -16,10 +19,10 @@
   
   %body
     - if flash[:warning]
-      .warning
+      .warning<
         = flash[:warning]
     - if flash[:notice]
-      .notice
+      .notice<
         = flash[:notice]
     
     = yield

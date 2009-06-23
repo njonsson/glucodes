@@ -414,71 +414,87 @@ module MeasurementTest
     
   end
   
-  module Skew
+  class With50Value < ActiveSupport::TestCase
     
-    class With50Value < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 50)
-        @measurement.save!
-      end
-      
-      test 'should set skew to 0.5 when saved' do
-        assert_equal '0.5', @measurement.skew.to_s
-      end
-      
+    def setup
+      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 50)
+      @measurement.save!
     end
     
-    class With80Value < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 80)
-        @measurement.save!
-      end
-      
-      test 'should set skew to 0.2 when saved' do
-        assert_equal '0.2', @measurement.skew.to_s
-      end
-      
+    test 'should set skew to 0.5 when saved' do
+      assert_equal 0.5, @measurement.skew.round(2)
     end
     
-    class With100Value < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 100)
-        @measurement.save!
-      end
-      
-      test 'should set skew to 0.0 when saved' do
-        assert_equal '0.0', @measurement.skew.to_s
-      end
-      
+    test 'should return :critical when sent severity' do
+      assert_equal :critical, @measurement.severity
     end
     
-    class With125Value < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 125)
-        @measurement.save!
-      end
-      
-      test 'should set skew to 0.2 when saved' do
-        assert_equal '0.2', @measurement.skew.to_s
-      end
-      
+  end
+  
+  class With80Value < ActiveSupport::TestCase
+    
+    def setup
+      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 80)
+      @measurement.save!
     end
     
-    class With200Value < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 200)
-        @measurement.save!
-      end
-      
-      test 'should set skew to 0.5 when saved' do
-        assert_equal '0.5', @measurement.skew.to_s
-      end
-      
+    test 'should set skew to 0.2 when saved' do
+      assert_equal 0.2, @measurement.skew.round(2)
+    end
+    
+    test 'should return :moderate when sent severity' do
+      assert_equal :moderate, @measurement.severity
+    end
+    
+  end
+  
+  class With100Value < ActiveSupport::TestCase
+    
+    def setup
+      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 100)
+      @measurement.save!
+    end
+    
+    test 'should set skew to 0 when saved' do
+      assert_equal 0.0, @measurement.skew.round(2)
+    end
+    
+    test 'should return nil when sent severity' do
+      assert_nil @measurement.severity
+    end
+    
+  end
+  
+  class With125Value < ActiveSupport::TestCase
+    
+    def setup
+      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 125)
+      @measurement.save!
+    end
+    
+    test 'should set skew to 0.2 when saved' do
+      assert_equal 0.2, @measurement.skew.round(2)
+    end
+    
+    test 'should return :moderate when sent severity' do
+      assert_equal :moderate, @measurement.severity
+    end
+    
+  end
+  
+  class With200Value < ActiveSupport::TestCase
+    
+    def setup
+      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 200)
+      @measurement.save!
+    end
+    
+    test 'should set skew to 0.5 when saved' do
+      assert_equal 0.5, @measurement.skew.round(2)
+    end
+    
+    test 'should return :critical when sent severity' do
+      assert_equal :critical, @measurement.severity
     end
     
   end

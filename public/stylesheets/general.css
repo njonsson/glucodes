@@ -1,4 +1,7 @@
-body { margin: 2em; }
+body {
+  font-family: Arial, sans-serif;
+  margin:      2em;
+}
 
 h1, h2, h3, h4, h5, h6, strong, b { font-weight: bold; }
 
@@ -16,15 +19,19 @@ h5 { font-size: 125%; }
 
 h6 { font-size: 110%; }
 
+abbr { cursor: help; }
+
+abbr:hover { border-bottom: 0.1em dotted black; }
+
 em, i { font-style: italic; }
 
 th { font-weight: bold; }
 
-th, th[align='center'] { text-align: center; }
+*[align='center'] { text-align: center; }
 
-th[align='left'] { text-align: left; }
+*[align='left'] { text-align: left; }
 
-th[align='right'] { text-align: right; }
+*[align='right'] { text-align: right; }
 
 li
 {
@@ -36,55 +43,14 @@ ol li { list-style: decimal inside; }
 
 ul li { list-style: disc outside; }
 
-.links li { display: inline; }
-
-dt { float: left; }
-
-form dt
-{
-  padding-right: 0.5em;
-  text-align:    right;
+th, td {
+  border:  1px solid lightgrey;
+  margin:  0.25em;
+  padding: 0.25em;
 }
 
-.column-section { display: table; }
+.pagination { margin-top: 1em; }
 
-.column-set { display: table-row; }
+.moderate { background-color: #ffff66; }
 
-.column
-{
-  display: table-cell;
-  padding: 0 2em 0 0;
-}
-
-/* will_paginate */
-.pagination a
-{
-  padding: 2px 5px 2px 5px;
-  margin: 2px;
-  border: 1px solid #aaaadd;
-  text-decoration: none;
-  color: #000099;
-}
-
-.pagination a:hover, .pagination a:active {
-  border: 1px solid #000099;
-  color: #000;
-}
-
-.pagination span.current {
-    padding: 2px 5px 2px 5px;
-    margin: 2px;
-    border: 1px solid #000099;
-    font-weight: bold;
-    background-color: #000099;
-    color: #FFF;
-  }
-
-.pagination span.disabled
-{
-  padding: 2px 5px 2px 5px;
-  margin: 2px;
-  border: 1px solid #eee;
-  color: #ddd;
-}
-/* end of will_paginate */
+.critical { background-color: #ff6666; }
