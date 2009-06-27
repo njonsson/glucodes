@@ -126,8 +126,8 @@ module MeasurementTest
     class With045959At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 4:59:59', :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 4:59:59',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to day before at when saved' do
@@ -144,8 +144,8 @@ module MeasurementTest
     class With050000At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 5:00', :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 5:00',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -162,8 +162,8 @@ module MeasurementTest
     class With075959At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 7:59:59', :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 7:59:59',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -180,8 +180,8 @@ module MeasurementTest
     class With080000At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 8:00', :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 8:00',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -198,9 +198,8 @@ module MeasurementTest
     class With105959At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 10:59:59',
-                                       :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 10:59:59',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -217,8 +216,8 @@ module MeasurementTest
     class With110000At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 11:00', :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 11:00',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -235,9 +234,8 @@ module MeasurementTest
     class With135959At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 13:59:59',
-                                       :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 13:59:59',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -254,8 +252,8 @@ module MeasurementTest
     class With140000At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 14:00', :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 14:00',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -272,9 +270,8 @@ module MeasurementTest
     class With165959At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 16:59:59',
-                                       :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 16:59:59',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -291,8 +288,8 @@ module MeasurementTest
     class With170000At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 17:00', :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 17:00',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -309,9 +306,8 @@ module MeasurementTest
     class With195959At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 19:59:59',
-                                       :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 19:59:59',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -328,8 +324,8 @@ module MeasurementTest
     class With200000At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 20:00', :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 20:00',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -346,9 +342,8 @@ module MeasurementTest
     class With225959At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 22:59:59',
-                                       :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 22:59:59',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -365,8 +360,8 @@ module MeasurementTest
     class With230000At < ActiveSupport::TestCase
       
       def setup
-        @measurement = Measurement.new(:at => '2007-12-09 23:00', :value => 100)
-        @measurement.save!
+        @measurement = Measurement.create!(:at => '2007-12-09 23:00',
+                                           :value => 100)
       end
       
       test 'should set adjusted_date to at when saved' do
@@ -385,8 +380,8 @@ module MeasurementTest
   class With50Value < ActiveSupport::TestCase
     
     def setup
-      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 50)
-      @measurement.save!
+      @measurement = Measurement.create!(:at => '2009-01-01 12:00',
+                                         :value => 50)
     end
     
     test 'should set skew to 0.5 when saved' do
@@ -402,8 +397,8 @@ module MeasurementTest
   class With80Value < ActiveSupport::TestCase
     
     def setup
-      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 80)
-      @measurement.save!
+      @measurement = Measurement.create!(:at => '2009-01-01 12:00',
+                                         :value => 80)
     end
     
     test 'should set skew to 0.2 when saved' do
@@ -419,8 +414,8 @@ module MeasurementTest
   class With100Value < ActiveSupport::TestCase
     
     def setup
-      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 100)
-      @measurement.save!
+      @measurement = Measurement.create!(:at => '2009-01-01 12:00',
+                                         :value => 100)
     end
     
     test 'should set skew to 0 when saved' do
@@ -436,8 +431,8 @@ module MeasurementTest
   class With125Value < ActiveSupport::TestCase
     
     def setup
-      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 125)
-      @measurement.save!
+      @measurement = Measurement.create!(:at => '2009-01-01 12:00',
+                                         :value => 125)
     end
     
     test 'should set skew to 0.2 when saved' do
@@ -453,8 +448,8 @@ module MeasurementTest
   class With200Value < ActiveSupport::TestCase
     
     def setup
-      @measurement = Measurement.new(:at => '2009-01-01 12:00', :value => 200)
-      @measurement.save!
+      @measurement = Measurement.create!(:at => '2009-01-01 12:00',
+                                         :value => 200)
     end
     
     test 'should set skew to 0.5 when saved' do
