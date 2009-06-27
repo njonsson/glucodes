@@ -54,3 +54,9 @@ th, td {
 .moderate { background-color: #ffff66; }
 
 .critical { background-color: #ff6666; }
+
+.pagination a { padding: 0.5em; }
+
+.pagination a:hover {
+  background-color: lightgrey;
+}
