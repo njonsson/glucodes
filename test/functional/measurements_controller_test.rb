@@ -3,7 +3,7 @@ require 'test_helper'
 class MeasurementsControllerTest < ActionController::TestCase
   
   def setup
-    create_measurements! 50
+    create_measurements! 21
   end
   
   test 'should handle GET index.html as expected' do
