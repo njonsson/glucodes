@@ -9,24 +9,51 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20071201045854) do
+ActiveRecord::Schema.define(:version => 20090624010540) do
+
+  create_table "aggregates", :force => true do |t|
+    t.string   "type",                                            :null => false
+    t.date     "period_ends_on",                                  :null => false
+    t.boolean  "contains_approximate_times",   :default => false, :null => false
+    t.float    "average_value",                                   :null => false
+    t.float    "standard_deviation_of_value",                     :null => false
+    t.float    "maximum_value",                                   :null => false
+    t.float    "minimum_value",                                   :null => false
+    t.float    "average_skew",                                    :null => false
+    t.float    "average_value_in_time_slot_a"
+    t.float    "average_value_in_time_slot_b"
+    t.float    "average_value_in_time_slot_c"
+    t.float    "average_value_in_time_slot_d"
+    t.float    "average_value_in_time_slot_e"
+    t.float    "average_value_in_time_slot_f"
+    t.float    "average_skew_in_time_slot_a"
+    t.float    "average_skew_in_time_slot_b"
+    t.float    "average_skew_in_time_slot_c"
+    t.float    "average_skew_in_time_slot_d"
+    t.float    "average_skew_in_time_slot_e"
+    t.float    "average_skew_in_time_slot_f"
+    t.string   "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "aggregates", ["period_ends_on"], :name => "index_aggregates_on_period_ends_on"
+  add_index "aggregates", ["type"], :name => "index_aggregates_on_type"
 
   create_table "measurements", :force => true do |t|
-    t.datetime "at",                                                           :null => false
-    t.boolean  "approximate_time",                          :default => false, :null => false
-    t.date     "adjusted_date",                                                :null => false
-    t.date     "adjusted_end_of_quarter_date",                                 :null => false
-    t.string   "time_period",                  :limit => 1,                    :null => false
-    t.float    "value",                                                        :null => false
-    t.float    "skew",                                                         :null => false
+    t.datetime "at",                                               :null => false
+    t.boolean  "approximate_time",              :default => false, :null => false
+    t.date     "adjusted_date",                                    :null => false
+    t.string   "time_slot",        :limit => 1,                    :null => false
+    t.float    "value",                                            :null => false
+    t.float    "skew",                                             :null => false
     t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "measurements", ["adjusted_date"], :name => "index_measurements_on_adjusted_date"
-  add_index "measurements", ["adjusted_end_of_quarter_date"], :name => "index_measurements_on_adjusted_end_of_quarter_date"
   add_index "measurements", ["at"], :name => "index_measurements_on_at"
-  add_index "measurements", ["time_period"], :name => "index_measurements_on_time_period"
+  add_index "measurements", ["time_slot"], :name => "index_measurements_on_time_slot"
 
 end

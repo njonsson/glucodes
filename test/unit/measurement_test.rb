@@ -95,12 +95,8 @@ module MeasurementTest
       assert_nil Measurement.new(:adjusted_date => '2009-06-10').adjusted_date
     end
     
-    test 'should protect adjusted_end_of_quarter_date' do
-      assert_nil Measurement.new(:adjusted_end_of_quarter_date => '2009-06-10').adjusted_end_of_quarter_date
-    end
-    
-    test 'should protect time_period' do
-      assert_nil Measurement.new(:time_period => 'a').time_period
+    test 'should protect time_slot' do
+      assert_nil Measurement.new(:time_slot => 'a').time_slot
     end
     
     test 'should not protect value' do
@@ -139,8 +135,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to g when saved' do
-        assert_equal 'g', @measurement.time_period
+      test 'should set time_slot to g when saved' do
+        assert_equal 'g', @measurement.time_slot
       end
       
     end
@@ -157,8 +153,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "a" when saved' do
-        assert_equal 'a', @measurement.time_period
+      test 'should set time_slot to "a" when saved' do
+        assert_equal 'a', @measurement.time_slot
       end
       
     end
@@ -175,8 +171,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "a" when saved' do
-        assert_equal 'a', @measurement.time_period
+      test 'should set time_slot to "a" when saved' do
+        assert_equal 'a', @measurement.time_slot
       end
       
     end
@@ -193,8 +189,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "b" when saved' do
-        assert_equal 'b', @measurement.time_period
+      test 'should set time_slot to "b" when saved' do
+        assert_equal 'b', @measurement.time_slot
       end
       
     end
@@ -212,8 +208,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "b" when saved' do
-        assert_equal 'b', @measurement.time_period
+      test 'should set time_slot to "b" when saved' do
+        assert_equal 'b', @measurement.time_slot
       end
       
     end
@@ -230,8 +226,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "c" when saved' do
-        assert_equal 'c', @measurement.time_period
+      test 'should set time_slot to "c" when saved' do
+        assert_equal 'c', @measurement.time_slot
       end
       
     end
@@ -249,8 +245,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "c" when saved' do
-        assert_equal 'c', @measurement.time_period
+      test 'should set time_slot to "c" when saved' do
+        assert_equal 'c', @measurement.time_slot
       end
       
     end
@@ -267,8 +263,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "d" when saved' do
-        assert_equal 'd', @measurement.time_period
+      test 'should set time_slot to "d" when saved' do
+        assert_equal 'd', @measurement.time_slot
       end
       
     end
@@ -286,8 +282,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "d" when saved' do
-        assert_equal 'd', @measurement.time_period
+      test 'should set time_slot to "d" when saved' do
+        assert_equal 'd', @measurement.time_slot
       end
       
     end
@@ -304,8 +300,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "e" when saved' do
-        assert_equal 'e', @measurement.time_period
+      test 'should set time_slot to "e" when saved' do
+        assert_equal 'e', @measurement.time_slot
       end
       
     end
@@ -323,8 +319,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "e" when saved' do
-        assert_equal 'e', @measurement.time_period
+      test 'should set time_slot to "e" when saved' do
+        assert_equal 'e', @measurement.time_slot
       end
       
     end
@@ -341,8 +337,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "f" when saved' do
-        assert_equal 'f', @measurement.time_period
+      test 'should set time_slot to "f" when saved' do
+        assert_equal 'f', @measurement.time_slot
       end
       
     end
@@ -360,8 +356,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "f" when saved' do
-        assert_equal 'f', @measurement.time_period
+      test 'should set time_slot to "f" when saved' do
+        assert_equal 'f', @measurement.time_slot
       end
       
     end
@@ -378,36 +374,8 @@ module MeasurementTest
                      @measurement.adjusted_date
       end
       
-      test 'should set time_period to "g" when saved' do
-        assert_equal 'g', @measurement.time_period
-      end
-      
-    end
-    
-    class WithMarchAt < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.new(:at => '2009-03-31 12:00', :value => 100)
-        @measurement.save!
-      end
-      
-      test 'should set adjusted_end_of_quarter_date to end of Q1 for adjusted_date when saved' do
-        assert_equal Time.parse('2009-03-31 23:59:59 UTC'),
-                     @measurement.adjusted_end_of_quarter_date
-      end
-      
-    end
-    
-    class WithAprilAt < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.new(:at => '2009-04-01 12:00', :value => 100)
-        @measurement.save!
-      end
-      
-      test 'should set adjusted_end_of_quarter_date to end of Q2 for adjusted_date when saved' do
-        assert_equal Time.parse('2009-06-30 23:59:59 UTC'),
-                     @measurement.adjusted_end_of_quarter_date
+      test 'should set time_slot to "g" when saved' do
+        assert_equal 'g', @measurement.time_slot
       end
       
     end

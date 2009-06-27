@@ -13,13 +13,16 @@
         Adjusted Date
       
       %th{'align' => 'center'}<
-        Time Period
+        Time Slot
       
       %th{'align' => 'right'}<
         Value
       
       %th{'align' => 'right'}<
         Skew
+      
+      %th<
+        Notes
   
   %tbody
     - @measurements.each do |m|
@@ -34,13 +37,16 @@
           = m.adjusted_date.to_formatted_s(:html)
         
         %td{'align' => 'center'}<
-          = m.time_period
+          = m.time_slot
         
         %td{'align' => 'right', 'class' => m.severity}<
           = m.value.round
         
         %td{'align' => 'right', 'class' => m.severity}<
           = m.skew.round(1)
+        
+        %td<
+          = m.notes
 
 = will_paginate @measurements, :inner_window => 1
 
