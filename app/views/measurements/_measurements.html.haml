@@ -27,26 +27,26 @@
   %tbody
     - @measurements.each do |m|
       %tr
-        %td{'align' => 'right'}<
+        %td{'align' => 'right', 'valign' => 'top'}<
           = m.at.to_formatted_s(:html)
         
-        %td{'align' => 'center'}<
+        %td{'align' => 'center', 'valign' => 'top'}<
           = m.approximate_time ? 'Yes' : ''
         
-        %td{'align' => 'right'}<
+        %td{'align' => 'right', 'valign' => 'top'}<
           = m.adjusted_date.to_formatted_s(:html)
         
-        %td{'align' => 'center'}<
+        %td{'align' => 'center', 'valign' => 'top'}<
           = m.time_slot
         
-        %td{'align' => 'right', 'class' => m.severity}<
+        %td{'align' => 'right', 'class' => m.severity, 'valign' => 'top'}<
           = m.value.round
         
-        %td{'align' => 'right', 'class' => m.severity}<
+        %td{'align' => 'right', 'class' => m.severity, 'valign' => 'top'}<
           = m.skew.round(1)
         
-        %td<
-          = m.notes
+        %td
+          = simple_format(m.notes)
 
 = will_paginate @measurements, :inner_window => 1
 
