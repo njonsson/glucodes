@@ -131,8 +131,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to day before at when saved' do
-        assert_equal Time.parse('2007-12-08 4:59:59 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-08'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to g when saved' do
@@ -149,8 +148,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 5:00 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "a" when saved' do
@@ -167,8 +165,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 7:59:59 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "a" when saved' do
@@ -185,8 +182,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 8:00 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "b" when saved' do
@@ -203,8 +199,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 10:59:59 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "b" when saved' do
@@ -221,8 +216,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 11:00 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "c" when saved' do
@@ -239,8 +233,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 13:59:59 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "c" when saved' do
@@ -257,8 +250,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 14:00 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "d" when saved' do
@@ -275,8 +267,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 16:59:59 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "d" when saved' do
@@ -293,8 +284,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 17:00 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "e" when saved' do
@@ -311,8 +301,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 19:59:59 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "e" when saved' do
@@ -329,8 +318,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 20:00 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "f" when saved' do
@@ -347,8 +335,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 22:59:59 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "f" when saved' do
@@ -365,8 +352,7 @@ module MeasurementTest
       end
       
       test 'should set adjusted_date to at when saved' do
-        assert_equal Time.parse('2007-12-09 23:00 UTC'),
-                     @measurement.adjusted_date
+        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
       end
       
       test 'should set time_slot to "g" when saved' do

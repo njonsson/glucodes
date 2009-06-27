@@ -27,28 +27,28 @@ private
     case self.at.hour
       when (0...5)
         self.time_slot = 'g'
-        self.adjusted_date = at.yesterday
+        self.adjusted_date = at.yesterday.to_date
       when (5...8)
         self.time_slot = 'a'
-        self.adjusted_date = at
+        self.adjusted_date = at.to_date
       when (8...11)
         self.time_slot = 'b'
-        self.adjusted_date = at
+        self.adjusted_date = at.to_date
       when (11...14)
         self.time_slot = 'c'
-        self.adjusted_date = at
+        self.adjusted_date = at.to_date
       when (14...17)
         self.time_slot = 'd'
-        self.adjusted_date = at
+        self.adjusted_date = at.to_date
       when (17...20)
         self.time_slot = 'e'
-        self.adjusted_date = at
+        self.adjusted_date = at.to_date
       when (20...23)
         self.time_slot = 'f'
-        self.adjusted_date = at
+        self.adjusted_date = at.to_date
       else
         self.time_slot = 'g'
-        self.adjusted_date = at
+        self.adjusted_date = at.to_date
     end
     self.skew = 1.0 - ((value / 100.0) ** ((value <= 100.0) ? 1.0 : -1.0));
   end
