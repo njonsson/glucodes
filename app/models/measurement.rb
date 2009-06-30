@@ -3,7 +3,7 @@
 # Represents an individual glucose measurement.
 class Measurement < ActiveRecord::Base
   
-  attr_accessible :at, :value, :approximate_time, :notes
+  attr_accessible :at, :approximate_time, :value, :notes
   
   validates_presence_of :at, :value
   validates_uniqueness_of :at, :allow_blank => true
