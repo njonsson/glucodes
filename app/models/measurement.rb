@@ -17,7 +17,7 @@ class Measurement < ActiveRecord::Base
   def severity
     rounded_skew = skew.round(2)
     return nil       if (rounded_skew < 0.20)
-    return :moderate if ((0.20 <= rounded_skew) && (rounded_skew <= 0.40))
+    return :moderate if (0.20..0.40).include?(rounded_skew)
     :critical
   end
   
