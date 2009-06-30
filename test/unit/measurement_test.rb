@@ -60,17 +60,17 @@ module MeasurementTest
   end
   
   class WithLongNotes < ActiveSupport::TestCase
-  
+    
     def setup
       @measurement = Measurement.new(:notes => 'a' * 257)
       @measurement.valid?
     end
-  
+    
     test 'should have length validation error on value' do
       assert_equal 'is too long (maximum is 255 characters)',
                    @measurement.errors.on(:notes)
     end
-  
+    
   end
   
   class Protections < ActiveSupport::TestCase
