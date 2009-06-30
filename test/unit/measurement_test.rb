@@ -121,7 +121,7 @@ module MeasurementTest
     
   end
   
-  module AdjustedDateAndTimeSlotAndSkew
+  module AdjustedDateAndTimeSlot
     
     class With045959At < ActiveSupport::TestCase
       
