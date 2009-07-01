@@ -12,16 +12,43 @@ class Measurement < ActiveRecord::Base
   
   before_save :set_adjusted_date_and_time_slot_and_skew
   
+  after_save :recreate_daily_aggregate
+  
   default_scope :order => 'at DESC'
   
   def severity
-    rounded_skew = skew.round(2)
-    return nil       if (rounded_skew < 0.20)
-    return :moderate if (0.20..0.40).include?(rounded_skew)
-    :critical
+    Severity.of_skew skew
   end
   
 private
+  
+  def recreate_daily_aggregate
+    Daily.delete_all({:period_ends_on => adjusted_date})
+    days_measurements = Measurement.find(:all,
+                                         :conditions => {:adjusted_date => adjusted_date},
+                                         :order => 'at')
+    values = days_measurements.collect(&:value)
+    Daily.create! :period_ends_on => adjusted_date,
+                  :contains_approximate_times => days_measurements.any?(&:approximate_time?),
+                  :average_value => Math.mean(*values),
+                  :standard_deviation_of_value => Math.stddevp(*values),
+                  :maximum_value => values.max,
+                  :minimum_value => values.min,
+                  :average_skew => Measurement.average(:skew, :conditions => {:adjusted_date => adjusted_date}),
+                  :average_value_in_time_slot_a => Measurement.average(:value, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'a'}),
+                  :average_value_in_time_slot_b => Measurement.average(:value, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'b'}),
+                  :average_value_in_time_slot_c => Measurement.average(:value, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'c'}),
+                  :average_value_in_time_slot_d => Measurement.average(:value, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'd'}),
+                  :average_value_in_time_slot_e => Measurement.average(:value, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'e'}),
+                  :average_value_in_time_slot_f => Measurement.average(:value, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'f'}),
+                  :average_skew_in_time_slot_a => Measurement.average(:skew, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'a'}),
+                  :average_skew_in_time_slot_b => Measurement.average(:skew, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'b'}),
+                  :average_skew_in_time_slot_c => Measurement.average(:skew, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'c'}),
+                  :average_skew_in_time_slot_d => Measurement.average(:skew, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'd'}),
+                  :average_skew_in_time_slot_e => Measurement.average(:skew, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'e'}),
+                  :average_skew_in_time_slot_f => Measurement.average(:skew, :conditions => {:adjusted_date => adjusted_date, :time_slot => 'f'}),
+                  :notes => days_measurements.collect(&:notes).compact.join("\n\n")
+  end
   
   def set_adjusted_date_and_time_slot_and_skew
     case self.at.hour

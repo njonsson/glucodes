@@ -373,7 +373,7 @@ module MeasurementTest
       end
       
       test 'should set skew to 0.5 when saved' do
-        assert_equal 0.5, @measurement.skew.round(2)
+        assert_equal 0.5, @measurement.skew
       end
       
       test 'should return :critical when sent severity' do
@@ -390,7 +390,7 @@ module MeasurementTest
       end
       
       test 'should set skew to 0.2 when saved' do
-        assert_equal 0.2, @measurement.skew.round(2)
+        assert_in_delta 0.2, @measurement.skew, 0.00000001
       end
       
       test 'should return :moderate when sent severity' do
@@ -406,8 +406,10 @@ module MeasurementTest
                                            :value => 100)
       end
       
-      test 'should set skew to 0 when saved' do
-        assert_equal 0.0, @measurement.skew.round(2)
+      test 'should set skew to 0.0 when saved' do
+        actual = @measurement.skew
+        assert_equal 0.0, actual
+        assert_instance_of Float, actual
       end
       
       test 'should return nil when sent severity' do
@@ -424,7 +426,7 @@ module MeasurementTest
       end
       
       test 'should set skew to 0.2 when saved' do
-        assert_equal 0.2, @measurement.skew.round(2)
+        assert_in_delta 0.2, @measurement.skew, 0.00000001
       end
       
       test 'should return :moderate when sent severity' do
@@ -441,13 +443,147 @@ module MeasurementTest
       end
       
       test 'should set skew to 0.5 when saved' do
-        assert_equal 0.5, @measurement.skew.round(2)
+        assert_equal 0.5, @measurement.skew
       end
       
       test 'should return :critical when sent severity' do
         assert_equal :critical, @measurement.severity
       end
       
+    end
+    
+  end
+  
+  class WithAssortedDatesAndValues < ActiveSupport::TestCase
+    
+    def do_create_measurements
+      @skews = []
+      @skews << Measurement.create!(:at => '2009-06-26 08:00',
+                                    :value => 70,
+                                    :notes => 'Foo').skew
+      @skews << Measurement.create!(:at => '2009-06-26 16:00',
+                                    :value => 120,
+                                    :notes => 'Bar').skew
+      @skews << Measurement.create!(:at => '2009-06-27 08:00',
+                                    :value => 80,
+                                    :approximate_time => true,
+                                    :notes => 'Baz').skew
+      @skews << Measurement.create!(:at => '2009-06-27 16:00',
+                                    :value => 115).skew
+    end
+    
+    test 'should create the expected number of Daily Aggregate records' do
+      assert_difference %w(Aggregate.count Daily.count), 2 do
+        do_create_measurements
+      end
+    end
+    
+    test 'should create expected Daily records with the expected period_ends_on values' do
+      do_create_measurements
+      assert_equal [Date.parse('2009-06-27'), Date.parse('2009-06-26')],
+                   Daily.all.collect(&:period_ends_on)
+    end
+    
+    test 'should create expected Daily records with the expected contains_approximate_times values' do
+      do_create_measurements
+      assert_equal [true, false],
+                   Daily.all.collect(&:contains_approximate_times)
+    end
+    
+    test 'should create expected Daily records with the expected average_value values' do
+      do_create_measurements
+      assert_equal [Math.mean(80, 115), Math.mean(70, 120)],
+                   Daily.all.collect(&:average_value)
+    end
+    
+    test 'should create expected Daily records with the expected standard_deviation_of_value values' do
+      do_create_measurements
+      assert_equal [Math.stddevp(80, 115), Math.stddevp(70, 120)],
+                   Daily.all.collect(&:standard_deviation_of_value)
+    end
+    
+    test 'should create expected Daily records with the expected maximum_value values' do
+      do_create_measurements
+      assert_equal [115, 120], Daily.all.collect(&:maximum_value)
+    end
+    
+    test 'should create expected Daily records with the expected minimum_value values' do
+      do_create_measurements
+      assert_equal [80, 70], Daily.all.collect(&:minimum_value)
+    end
+    
+    test 'should create expected Daily records with the expected average_skew values' do
+      do_create_measurements
+      assert_equal [Math.mean(*@skews[2..3]).round(8),
+                    Math.mean(*@skews[0..1]).round(8)],
+                   Daily.all.collect { |d| d.average_skew.round 8 }
+    end
+    
+    test 'should create expected Daily records with the expected average_value_in_time_slot_a values' do
+      do_create_measurements
+      assert_equal [nil, nil], Daily.all.collect(&:average_value_in_time_slot_a)
+    end
+    
+    test 'should create expected Daily records with the expected average_value_in_time_slot_b values' do
+      do_create_measurements
+      assert_equal [80, 70], Daily.all.collect(&:average_value_in_time_slot_b)
+    end
+    
+    test 'should create expected Daily records with the expected average_value_in_time_slot_c values' do
+      do_create_measurements
+      assert_equal [nil, nil], Daily.all.collect(&:average_value_in_time_slot_c)
+    end
+    
+    test 'should create expected Daily records with the expected average_value_in_time_slot_d values' do
+      do_create_measurements
+      assert_equal [115, 120], Daily.all.collect(&:average_value_in_time_slot_d)
+    end
+    
+    test 'should create expected Daily records with the expected average_value_in_time_slot_e values' do
+      do_create_measurements
+      assert_equal [nil, nil], Daily.all.collect(&:average_value_in_time_slot_e)
+    end
+    
+    test 'should create expected Daily records with the expected average_value_in_time_slot_f values' do
+      do_create_measurements
+      assert_equal [nil, nil], Daily.all.collect(&:average_value_in_time_slot_f)
+    end
+    
+    test 'should create expected Daily records with the expected average_skew_in_time_slot_a values' do
+      do_create_measurements
+      assert_equal [nil, nil], Daily.all.collect(&:average_skew_in_time_slot_a)
+    end
+    
+    test 'should create expected Daily records with the expected average_skew_in_time_slot_b values' do
+      do_create_measurements
+      assert_equal [@skews[2].round(8), @skews[0].round(8)],
+                   Daily.all.collect { |d| d.average_skew_in_time_slot_b.round 8 }
+    end
+    
+    test 'should create expected Daily records with the expected average_skew_in_time_slot_c values' do
+      do_create_measurements
+      assert_equal [nil, nil], Daily.all.collect(&:average_skew_in_time_slot_c)
+    end
+    
+    test 'should create expected Daily records with the expected average_skew_in_time_slot_d values' do
+      do_create_measurements
+      assert_equal [@skews[3].round(8), @skews[1].round(8)],
+                   Daily.all.collect { |d| d.average_skew_in_time_slot_d.round 8 }
+    end
+    
+    test 'should create expected Daily records with the expected average_skew_in_time_slot_e values' do
+      do_create_measurements
+      assert_equal [nil, nil], Daily.all.collect(&:average_skew_in_time_slot_e)
+    end
+    
+    test 'should create expected Daily records with the expected average_skew_in_time_slot_f values' do
+      do_create_measurements
+      assert_equal [nil, nil], Daily.all.collect(&:average_skew_in_time_slot_f)
+    end
+    
+    test 'should create expected Daily records with the expected notes values' do
+      do_create_measurements
+      assert_equal ["Baz", "Foo\n\nBar"], Daily.all.collect(&:notes)
     end
     
   end

@@ -12,6 +12,7 @@ module Glucodes
       
       # Returns the arithmetic mean of _numbers_.
       def mean(*numbers)
+        return 0.0 if numbers.empty?
         sum(*numbers) / numbers.length.to_f
       end
       
