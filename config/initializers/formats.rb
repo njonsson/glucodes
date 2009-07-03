@@ -12,3 +12,4 @@ Time::DATE_FORMATS[:html] = lambda { |time|
   am_pm = "<abbr title=\"#{ante_post} meridiem\">#{ante_post[0..0]}.m.</abbr>"
   time.strftime "#{DAY_OF_WEEK_FORMAT} #{month_day_year_format time} %I:%M #{am_pm}"
 }
+Time::DATE_FORMATS[:csv] = '%Y-%m-%d %H:%M'
