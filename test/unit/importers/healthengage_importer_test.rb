@@ -16,7 +16,7 @@ date;mgValue;mmolValue;eventId;dayPeriodId;timePeriodId;enterTypeId;comment
     end_header_and_content
     header_and_content.chomp
   end
-    
+  
   test 'should raise expected error when header is missing' do
     assert_no_difference 'Measurement.count' do
       assert_raise Importers::UnsupportedFileFormatError do
