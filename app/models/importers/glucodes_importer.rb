@@ -17,7 +17,7 @@ class Importers::GlucodesImporter
       cells = [m.at.to_s(:csv),
                m.approximate_time ? 'true' : 'false',
                m.value,
-               m.notes.inspect]
+               m.notes.blank? ? nil : m.notes.inspect]
       data.puts cells.join(',')
     end
     data.string
