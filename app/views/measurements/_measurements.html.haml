@@ -4,10 +4,10 @@
   %thead
     %tr
       %th{'align' => 'right'}<
+        - if @measurements.any? { |m| m.approximate_time? }
+          %span.approximate<
+            (≈ Approximate)
         Date/Time
-      
-      %th{'align' => 'center'}<
-        Approximate Time?
       
       %th{'align' => 'right'}<
         Adjusted Date
@@ -26,12 +26,9 @@
   
   %tbody
     - @measurements.each do |m|
-      %tr
+      %tr{'class' => m.approximate_time ? 'approximate' : nil}
         %td{'align' => 'right', 'valign' => 'top'}<
-          = m.at.to_formatted_s(:html)
-        
-        %td{'align' => 'center', 'valign' => 'top'}<
-          = m.approximate_time ? 'Yes' : ''
+          = "#{m.approximate_time ? '≈ ' : nil}#{m.at.to_formatted_s :html}"
         
         %td{'align' => 'right', 'valign' => 'top'}<
           = m.adjusted_date.to_formatted_s(:html)

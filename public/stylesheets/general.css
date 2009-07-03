@@ -49,6 +49,8 @@ th, td {
   padding: 0.25em;
 }
 
+.approximate { font-style: italic; }
+
 .pagination { margin-top: 1em; }
 
 .moderate { background-color: #ffff66; }
