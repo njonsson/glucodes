@@ -54,18 +54,18 @@ class Aggregate < ActiveRecord::Base
   end
   
   def risk_grade
-    rounded_risk_index = risk_index.round(8)
-    return 'A+' if (rounded_risk_index < 0.33333333)
-    return 'A'  if (rounded_risk_index < 0.66666667)
+    rounded_risk_index = risk_index.round(6)
+    return 'A+' if (rounded_risk_index < 0.333333)
+    return 'A'  if (rounded_risk_index < 0.666667)
     return 'A-' if (rounded_risk_index < 1.0)
-    return 'B+' if (rounded_risk_index < 1.33333333)
-    return 'B'  if (rounded_risk_index < 1.66666667)
+    return 'B+' if (rounded_risk_index < 1.333333)
+    return 'B'  if (rounded_risk_index < 1.666667)
     return 'B-' if (rounded_risk_index < 2.0)
-    return 'C+' if (rounded_risk_index < 2.33333333)
-    return 'C'  if (rounded_risk_index < 2.66666667)
+    return 'C+' if (rounded_risk_index < 2.333333)
+    return 'C'  if (rounded_risk_index < 2.666667)
     return 'C-' if (rounded_risk_index < 3.0)
-    return 'D+' if (rounded_risk_index < 3.33333333)
-    return 'D'  if (rounded_risk_index < 3.66666667)
+    return 'D+' if (rounded_risk_index < 3.333333)
+    return 'D'  if (rounded_risk_index < 3.666667)
     return 'D-' if (rounded_risk_index < 4.0)
     'F'
   end

@@ -676,7 +676,7 @@ module DailyTest
     end
     
     test 'should return expected number when sent weighted_average_skew' do
-      assert_in_delta 0.05, @daily.weighted_average_skew, 0.00000001
+      assert_in_delta 0.05, @daily.weighted_average_skew, 0.000001
     end
     
     test 'should return expected severity when sent weighted_average_skew_severity' do
@@ -684,7 +684,7 @@ module DailyTest
     end
     
     test 'should return expected number when sent risk_index' do
-      assert_in_delta 0.91666667, @daily.risk_index, 0.00000001
+      assert_in_delta 0.916667, @daily.risk_index, 0.000001
     end
     
     test 'should return expected severity when sent risk_severity' do
@@ -723,7 +723,7 @@ module DailyTest
     end
     
     test 'should return expected number when sent risk_index' do
-      assert_in_delta 1.58333333, @daily.risk_index, 0.00000001
+      assert_in_delta 1.583333, @daily.risk_index, 0.000001
     end
     
     test 'should return expected severity when sent risk_severity' do
@@ -764,7 +764,7 @@ module DailyTest
     end
     
     test 'should return expected number when sent risk_index' do
-      assert_in_delta 2.5, @daily.risk_index, 0.00000001
+      assert_in_delta 2.5, @daily.risk_index, 0.000001
     end
     
     test 'should return expected severity when sent risk_severity' do
@@ -784,28 +784,28 @@ module DailyTest
       assert_equal 'A+', @daily.risk_grade
     end
     
-    test 'should return "A+" when sent risk_grade and risk_index is 0.33333332' do
-      @daily.stubs(:risk_index).returns 0.33333332
+    test 'should return "A+" when sent risk_grade and risk_index is 0.333332' do
+      @daily.stubs(:risk_index).returns 0.333332
       assert_equal 'A+', @daily.risk_grade
     end
     
-    test 'should return "A" when sent risk_grade and risk_index is 0.33333333' do
-      @daily.stubs(:risk_index).returns 0.33333333
+    test 'should return "A" when sent risk_grade and risk_index is 0.333333' do
+      @daily.stubs(:risk_index).returns 0.333333
       assert_equal 'A', @daily.risk_grade
     end
     
-    test 'should return "A" when sent risk_grade and risk_index is 0.66666666' do
-      @daily.stubs(:risk_index).returns 0.66666666
+    test 'should return "A" when sent risk_grade and risk_index is 0.666666' do
+      @daily.stubs(:risk_index).returns 0.666666
       assert_equal 'A', @daily.risk_grade
     end
     
-    test 'should return "A-" when sent risk_grade and risk_index is 0.66666667' do
-      @daily.stubs(:risk_index).returns 0.66666667
+    test 'should return "A-" when sent risk_grade and risk_index is 0.666667' do
+      @daily.stubs(:risk_index).returns 0.666667
       assert_equal 'A-', @daily.risk_grade
     end
     
-    test 'should return "A-" when sent risk_grade and risk_index is 0.99999999' do
-      @daily.stubs(:risk_index).returns 0.99999999
+    test 'should return "A-" when sent risk_grade and risk_index is 0.999999' do
+      @daily.stubs(:risk_index).returns 0.999999
       assert_equal 'A-', @daily.risk_grade
     end
     
@@ -814,28 +814,28 @@ module DailyTest
       assert_equal 'B+', @daily.risk_grade
     end
     
-    test 'should return "B+" when sent risk_grade and risk_index is 1.33333332' do
-      @daily.stubs(:risk_index).returns 1.33333332
+    test 'should return "B+" when sent risk_grade and risk_index is 1.333332' do
+      @daily.stubs(:risk_index).returns 1.333332
       assert_equal 'B+', @daily.risk_grade
     end
     
-    test 'should return "B" when sent risk_grade and risk_index is 1.33333333' do
-      @daily.stubs(:risk_index).returns 1.33333333
+    test 'should return "B" when sent risk_grade and risk_index is 1.333333' do
+      @daily.stubs(:risk_index).returns 1.333333
       assert_equal 'B', @daily.risk_grade
     end
     
-    test 'should return "B" when sent risk_grade and risk_index is 1.66666666' do
-      @daily.stubs(:risk_index).returns 1.66666666
+    test 'should return "B" when sent risk_grade and risk_index is 1.666666' do
+      @daily.stubs(:risk_index).returns 1.666666
       assert_equal 'B', @daily.risk_grade
     end
     
-    test 'should return "B-" when sent risk_grade and risk_index is 1.66666667' do
-      @daily.stubs(:risk_index).returns 1.66666667
+    test 'should return "B-" when sent risk_grade and risk_index is 1.666667' do
+      @daily.stubs(:risk_index).returns 1.666667
       assert_equal 'B-', @daily.risk_grade
     end
     
-    test 'should return "B-" when sent risk_grade and risk_index is 1.99999999' do
-      @daily.stubs(:risk_index).returns 1.99999999
+    test 'should return "B-" when sent risk_grade and risk_index is 1.999999' do
+      @daily.stubs(:risk_index).returns 1.999999
       assert_equal 'B-', @daily.risk_grade
     end
     
@@ -844,28 +844,28 @@ module DailyTest
       assert_equal 'C+', @daily.risk_grade
     end
     
-    test 'should return "C+" when sent risk_grade and risk_index is 2.33333332' do
-      @daily.stubs(:risk_index).returns 2.33333332
+    test 'should return "C+" when sent risk_grade and risk_index is 2.333332' do
+      @daily.stubs(:risk_index).returns 2.333332
       assert_equal 'C+', @daily.risk_grade
     end
     
-    test 'should return "C" when sent risk_grade and risk_index is 2.33333333' do
-      @daily.stubs(:risk_index).returns 2.33333333
+    test 'should return "C" when sent risk_grade and risk_index is 2.333333' do
+      @daily.stubs(:risk_index).returns 2.333333
       assert_equal 'C', @daily.risk_grade
     end
     
-    test 'should return "C" when sent risk_grade and risk_index is 2.66666666' do
-      @daily.stubs(:risk_index).returns 2.66666666
+    test 'should return "C" when sent risk_grade and risk_index is 2.666666' do
+      @daily.stubs(:risk_index).returns 2.666666
       assert_equal 'C', @daily.risk_grade
     end
     
-    test 'should return "C-" when sent risk_grade and risk_index is 2.66666667' do
-      @daily.stubs(:risk_index).returns 2.66666667
+    test 'should return "C-" when sent risk_grade and risk_index is 2.666667' do
+      @daily.stubs(:risk_index).returns 2.666667
       assert_equal 'C-', @daily.risk_grade
     end
     
-    test 'should return "C-" when sent risk_grade and risk_index is 2.99999999' do
-      @daily.stubs(:risk_index).returns 2.99999999
+    test 'should return "C-" when sent risk_grade and risk_index is 2.999999' do
+      @daily.stubs(:risk_index).returns 2.999999
       assert_equal 'C-', @daily.risk_grade
     end
     
@@ -874,28 +874,28 @@ module DailyTest
       assert_equal 'D+', @daily.risk_grade
     end
     
-    test 'should return "D+" when sent risk_grade and risk_index is 3.33333332' do
-      @daily.stubs(:risk_index).returns 3.33333332
+    test 'should return "D+" when sent risk_grade and risk_index is 3.333332' do
+      @daily.stubs(:risk_index).returns 3.333332
       assert_equal 'D+', @daily.risk_grade
     end
     
-    test 'should return "D" when sent risk_grade and risk_index is 3.33333333' do
-      @daily.stubs(:risk_index).returns 3.33333333
+    test 'should return "D" when sent risk_grade and risk_index is 3.333333' do
+      @daily.stubs(:risk_index).returns 3.333333
       assert_equal 'D', @daily.risk_grade
     end
     
-    test 'should return "D" when sent risk_grade and risk_index is 3.66666666' do
-      @daily.stubs(:risk_index).returns 3.66666666
+    test 'should return "D" when sent risk_grade and risk_index is 3.666666' do
+      @daily.stubs(:risk_index).returns 3.666666
       assert_equal 'D', @daily.risk_grade
     end
     
-    test 'should return "D-" when sent risk_grade and risk_index is 3.66666667' do
-      @daily.stubs(:risk_index).returns 3.66666667
+    test 'should return "D-" when sent risk_grade and risk_index is 3.666667' do
+      @daily.stubs(:risk_index).returns 3.666667
       assert_equal 'D-', @daily.risk_grade
     end
     
-    test 'should return "D-" when sent risk_grade and risk_index is 3.99999999' do
-      @daily.stubs(:risk_index).returns 3.99999999
+    test 'should return "D-" when sent risk_grade and risk_index is 3.999999' do
+      @daily.stubs(:risk_index).returns 3.999999
       assert_equal 'D-', @daily.risk_grade
     end
     

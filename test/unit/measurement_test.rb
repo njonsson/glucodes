@@ -514,9 +514,9 @@ module MeasurementTest
     
     test 'should create expected Daily records with the expected average_skew values' do
       do_create_measurements
-      assert_equal [Math.mean(*@skews[2..3]).round(8),
-                    Math.mean(*@skews[0..1]).round(8)],
-                   Daily.all.collect { |d| d.average_skew.round 8 }
+      assert_equal [Math.mean(*@skews[2..3]).round(6),
+                    Math.mean(*@skews[0..1]).round(6)],
+                   Daily.all.collect { |d| d.average_skew.round 6 }
     end
     
     test 'should create expected Daily records with the expected average_value_in_time_slot_a values' do
@@ -556,8 +556,8 @@ module MeasurementTest
     
     test 'should create expected Daily records with the expected average_skew_in_time_slot_b values' do
       do_create_measurements
-      assert_equal [@skews[2].round(8), @skews[0].round(8)],
-                   Daily.all.collect { |d| d.average_skew_in_time_slot_b.round 8 }
+      assert_equal [@skews[2].round(6), @skews[0].round(6)],
+                   Daily.all.collect { |d| d.average_skew_in_time_slot_b.round 6 }
     end
     
     test 'should create expected Daily records with the expected average_skew_in_time_slot_c values' do
@@ -567,8 +567,8 @@ module MeasurementTest
     
     test 'should create expected Daily records with the expected average_skew_in_time_slot_d values' do
       do_create_measurements
-      assert_equal [@skews[3].round(8), @skews[1].round(8)],
-                   Daily.all.collect { |d| d.average_skew_in_time_slot_d.round 8 }
+      assert_equal [@skews[3].round(6), @skews[1].round(6)],
+                   Daily.all.collect { |d| d.average_skew_in_time_slot_d.round 6 }
     end
     
     test 'should create expected Daily records with the expected average_skew_in_time_slot_e values' do
