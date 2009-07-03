@@ -6,7 +6,7 @@
   %head
     %meta{'http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8'}
     
-    - page_title_segments = Array(yield(:page_title).chomp) + ['Glucodes']
+    - page_title_segments = Array((yield(:page_title) || '').chomp) + ['Glucodes']
     %title<
       = page_title_segments.join ' :: '
     
