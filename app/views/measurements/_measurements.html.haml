@@ -4,10 +4,7 @@
   %thead
     %tr
       %th{'align' => 'right', 'valign' => 'bottom'}<
-        - if @measurements.any? { |m| m.approximate_time? }
-          %span.approximate<
-            (≈ Approximate)
-        Date/Time
+        = date_time_column_header
       
       %th{'align' => 'right', 'valign' => 'bottom'}<
         Adjusted Date
