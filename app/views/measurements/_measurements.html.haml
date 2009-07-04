@@ -3,22 +3,22 @@
 %table
   %thead
     %tr
-      %th{'align' => 'right'}<
+      %th{'align' => 'right', 'valign' => 'bottom'}<
         - if @measurements.any? { |m| m.approximate_time? }
           %span.approximate<
             (≈ Approximate)
         Date/Time
       
-      %th{'align' => 'right'}<
+      %th{'align' => 'right', 'valign' => 'bottom'}<
         Adjusted Date
       
-      %th{'align' => 'center'}<
+      %th{'align' => 'center', 'valign' => 'bottom'}<
         Time Slot
       
-      %th{'align' => 'right'}<
+      %th{'align' => 'right', 'valign' => 'bottom'}<
         Value
       
-      %th{'align' => 'right'}<
+      %th{'align' => 'right', 'valign' => 'bottom'}<
         Skew
       
       %th<
