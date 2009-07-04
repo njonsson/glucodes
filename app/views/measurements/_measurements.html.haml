@@ -18,7 +18,7 @@
       %th{'align' => 'right', 'valign' => 'bottom'}<
         Skew
       
-      %th<
+      %th{'align' => 'left', 'valign' => 'bottom'}<
         Notes
   
   %tbody
@@ -39,8 +39,11 @@
         %td{'align' => 'right', 'class' => m.severity, 'valign' => 'top'}<
           = m.skew.round(1)
         
-        %td
-          = simple_format(m.notes)
+        - if m.notes
+          %td{'valign' => 'top'}
+            = simple_format(h(m.notes))
+        - else
+          %td{'valign' => 'top'}
 
 = will_paginate @measurements
 
