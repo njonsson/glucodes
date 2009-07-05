@@ -49,13 +49,15 @@ th, td {
   padding: 0.25em;
 }
 
+td.datetime { white-space: nowrap; }
+
 .approximate { font-style: italic; }
 
 .pagination { margin-top: 1em; }
 
-.moderate { background-color: #ffff66; }
+.moderate { background-color: #ffffaa; }
 
-.critical { background-color: #ff6666; }
+.critical { background-color: #ffaaaa; }
 
 .pagination a { padding: 0.5em; }
 
