@@ -23,7 +23,7 @@
   
   %tbody
     - @measurements.each do |m|
-      %tr{'class' => m.approximate_time ? 'approximate' : nil}
+      %tr{'class' => m.approximate_time? ? 'approximate' : nil}
         %td.datetime{'align' => 'right', 'valign' => 'top'}<
           = "#{m.approximate_time ? '≈ ' : nil}#{m.at.to_formatted_s :html}"
         
