@@ -3,6 +3,8 @@
 # Represents a set of aggregate Measurement statistics.
 class Aggregate < ActiveRecord::Base
   
+  TIME_SLOTS = %w(a b c d e f) #:nodoc:
+  
   abstract_class = true
   
   attr_protected :id, :type, :created_at, :updated_at
@@ -26,11 +28,11 @@ class Aggregate < ActiveRecord::Base
   validates_numericality_of :average_skew,
                             :greater_than_or_equal_to => 0,
                             :allow_blank => true
-  %w(a b c d e f).each do |time_slot|
-    validates_numericality_of :"average_value_in_time_slot_#{time_slot}",
+  TIME_SLOTS.each do |time_slot|
+    validates_numericality_of "average_value_in_time_slot_#{time_slot}",
                               :greater_than => 0,
                               :allow_blank => true
-    validates_numericality_of :"average_skew_in_time_slot_#{time_slot}",
+    validates_numericality_of "average_skew_in_time_slot_#{time_slot}",
                               :greater_than_or_equal_to => 0,
                               :allow_blank => true
   end
@@ -38,21 +40,49 @@ class Aggregate < ActiveRecord::Base
   
   default_scope :order => 'type, period_ends_on DESC'
   
-  def measured_slots_count
-    %w(a b c d e f).inject([]) do |result, time_slot|
-      result + [send(:"average_value_in_time_slot_#{time_slot}")]
+  # Returns <tt>:critical</tt>, <tt>:moderate</tt> or +nil+ according to the
+  # severity of Aggregate#average_skew.
+  def average_skew_severity
+    Severity.of_skew average_skew
+  end
+  
+  # Returns <tt>:critical</tt>, <tt>:moderate</tt> or +nil+ according to the
+  # severity of Aggregate#maximum_value.
+  def maximum_value_severity
+    Severity.of_skew Measurement.skew_of(maximum_value)
+  end
+  
+  # Returns <tt>:critical</tt>, <tt>:moderate</tt> or +nil+ according to the
+  # severity of Aggregate#minimum_value.
+  def minimum_value_severity
+    Severity.of_skew Measurement.skew_of(minimum_value)
+  end
+  
+  # Returns the number of measurements in the
+  # <i>average_value_in_time_slot_*</i> attributes.
+  def measured_time_slots_count
+    TIME_SLOTS.inject([]) do |result, time_slot|
+      result + [send("average_value_in_time_slot_#{time_slot}")]
     end.compact.length
   end
   
-  def measured_slots_count_severity
-    Severity.of_measured_slots_count measured_slots_count
+  # Returns <tt>:critical</tt>, <tt>:moderate</tt> or +nil+ according to the
+  # severity of Aggregate#measured_time_slots_count.
+  def measured_time_slots_count_severity
+    Severity.of_measured_time_slots_count measured_time_slots_count
   end
   
+  # Returns the calculated "risk skew" of an Aggregate. This number greater than
+  # or equal to 0.0 represents how far from the ideal the Aggregate is. A number
+  # indicates higher risk.
   def risk_index
-    [(((weighted_average_skew * 15.0) + (5.0 - measured_slots_count)) / 3.0),
+    [(((weighted_average_skew * 15.0) + (5.0 - measured_time_slots_count)) /
+      3.0),
      0].max
   end
   
+  # Returns a letter grade associated with Aggregate#risk_index. The grade is
+  # between "A+" and "F", depending on how far that number is from 0.0.
   def risk_grade
     rounded_risk_index = risk_index.round(6)
     return 'A+' if (rounded_risk_index < 0.333333)
@@ -70,17 +100,31 @@ class Aggregate < ActiveRecord::Base
     'F'
   end
   
+  # Returns <tt>:critical</tt>, <tt>:moderate</tt> or +nil+ according to the
+  # severity of Aggregate#risk_index.
   def risk_severity
     Severity.of_risk_index risk_index
   end
   
+  TIME_SLOTS.each do |time_slot|
+    define_method "severity_of_average_skew_in_time_slot_#{time_slot}" do
+      skew = send("average_skew_in_time_slot_#{time_slot}")
+      return nil unless skew
+      Severity.of_skew skew
+    end
+  end
+  
+  # Returns the arithmetic mean of the <i>average_value_in_time_slot_*</i>
+  # attributes.
   def weighted_average_skew
-    skews = %w(a b c d e f).collect do |time_slot|
-      send :"average_skew_in_time_slot_#{time_slot}"
+    skews = TIME_SLOTS.collect do |time_slot|
+      send "average_skew_in_time_slot_#{time_slot}"
     end.compact
     Math.mean *skews
   end
   
+  # Returns <tt>:critical</tt>, <tt>:moderate</tt> or +nil+ according to the
+  # severity of Aggregate#weighted_average_skew.
   def weighted_average_skew_severity
     Severity.of_skew weighted_average_skew
   end

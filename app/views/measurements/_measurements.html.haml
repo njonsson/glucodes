@@ -15,17 +15,14 @@
       %th{'align' => 'right', 'valign' => 'bottom'}<
         Value
       
-      %th{'align' => 'right', 'valign' => 'bottom'}<
-        Skew
-      
       %th{'align' => 'left', 'valign' => 'bottom'}<
         Notes
   
   %tbody
     - @measurements.each do |m|
       %tr{'class' => m.approximate_time? ? 'approximate' : nil}
-        %td.datetime{'align' => 'right', 'valign' => 'top'}<
-          = "#{m.approximate_time ? '≈ ' : nil}#{m.at.to_formatted_s :html}"
+        %td.nowrap{'align' => 'right', 'valign' => 'top'}<
+          = "#{m.approximate_time? ? '≈&nbsp;' : nil}#{m.at.to_formatted_s :html}"
         
         %td{'align' => 'right', 'valign' => 'top'}<
           = m.adjusted_date.to_formatted_s(:html)
@@ -33,11 +30,8 @@
         %td{'align' => 'center', 'valign' => 'top'}<
           = m.time_slot
         
-        %td{'align' => 'right', 'class' => m.severity, 'valign' => 'top'}<
+        %td{'align' => 'right', 'class' => m.severity, 'title' => m.severity, 'valign' => 'top'}<
           = m.value.round
-        
-        %td{'align' => 'right', 'class' => m.severity, 'valign' => 'top'}<
-          = m.skew.round(1)
         
         - if m.notes
           %td{'valign' => 'top'}

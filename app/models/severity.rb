@@ -6,11 +6,11 @@ module Severity
   class << self
     
     # Returns <tt>:critical</tt>, <tt>:moderate</tt> or +nil+ according to the
-    # severity of _measured_slots_count_.
-    def of_measured_slots_count(measured_slots_count)
-      rounded_measured_slots_count = measured_slots_count.to_f.round(6)
-      return nil       if (rounded_measured_slots_count > 4.0)
-      return :moderate if (rounded_measured_slots_count >= 3.5)
+    # severity of _measured_time_slots_count_.
+    def of_measured_time_slots_count(measured_time_slots_count)
+      rounded_measured_time_slots_count = measured_time_slots_count.to_f.round(6)
+      return nil       if (rounded_measured_time_slots_count > 4.0)
+      return :moderate if (rounded_measured_time_slots_count >= 3.5)
       :critical
     end
     

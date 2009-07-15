@@ -3,6 +3,17 @@ require 'mocha'
 
 module DailyTest
   
+  class TimeSlots < ActiveSupport::TestCase
+    
+    test 'should have the expected time slots' do
+      assert_equal %w(a b c d e f),
+                   Aggregate::TIME_SLOTS,
+                   'Aggregate::TIME_SLOTS must be in synch with the logic of ' +
+                   'Measurement#set_adjusted_date_and_time_slot'
+    end
+    
+  end
+  
   class MissingRequiredAttributes < ActiveSupport::TestCase
     
     def setup
@@ -556,9 +567,9 @@ module DailyTest
     
     test 'should not protect contains_approximate_times' do
       assert_equal true,
-                   Daily.new(:contains_approximate_times => true).contains_approximate_times
+                   Daily.new(:contains_approximate_times => true).contains_approximate_times?
       assert_equal false,
-                   Daily.new(:contains_approximate_times => false).contains_approximate_times
+                   Daily.new(:contains_approximate_times => false).contains_approximate_times?
     end
     
     test 'should not protect average_value' do
@@ -667,12 +678,12 @@ module DailyTest
                          :average_skew_in_time_slot_e => 0.1)
     end
     
-    test 'should return 3 when sent measured_slots_count' do
-      assert_equal 3, @daily.measured_slots_count
+    test 'should return 3 when sent measured_time_slots_count' do
+      assert_equal 3, @daily.measured_time_slots_count
     end
     
-    test 'should return :critical when sent measured_slots_count_severity' do
-      assert_equal :critical, @daily.measured_slots_count_severity
+    test 'should return :critical when sent measured_time_slots_count_severity' do
+      assert_equal :critical, @daily.measured_time_slots_count_severity
     end
     
     test 'should return expected number when sent weighted_average_skew' do
@@ -706,12 +717,12 @@ module DailyTest
                          :average_skew_in_time_slot_f => 0.4)
     end
     
-    test 'should return 4 when sent measured_slots_count' do
-      assert_equal 4, @daily.measured_slots_count
+    test 'should return 4 when sent measured_time_slots_count' do
+      assert_equal 4, @daily.measured_time_slots_count
     end
     
-    test 'should return :moderate when sent measured_slots_count_severity' do
-      assert_equal :moderate, @daily.measured_slots_count_severity
+    test 'should return :moderate when sent measured_time_slots_count_severity' do
+      assert_equal :moderate, @daily.measured_time_slots_count_severity
     end
     
     test 'should return expected number when sent weighted_average_skew' do
@@ -747,12 +758,12 @@ module DailyTest
                          :average_skew_in_time_slot_f => 0.7)
     end
     
-    test 'should return 5 when sent measured_slots_count' do
-      assert_equal 5, @daily.measured_slots_count
+    test 'should return 5 when sent measured_time_slots_count' do
+      assert_equal 5, @daily.measured_time_slots_count
     end
     
-    test 'should return nil when sent measured_slots_count_severity' do
-      assert_nil @daily.measured_slots_count_severity
+    test 'should return nil when sent measured_time_slots_count_severity' do
+      assert_nil @daily.measured_time_slots_count_severity
     end
     
     test 'should return expected number when sent weighted_average_skew' do

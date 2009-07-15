@@ -1,0 +1,15 @@
+/ BEGIN measurements/summary_by_day.html.haml
+
+- content_for :page_title do
+  Measurement Summary by Day
+
+%h1<
+  Measurement Summary by Day
+
+.content
+  = render :partial => 'dailies', :object => 'dailies'
+
+- content_for :additional_javascripts do
+  = javascript_include_tag 'measurements/pagination.js'
+
+/ END measurements/summary_by_day.html.haml
