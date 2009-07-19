@@ -4,6 +4,40 @@ module MeasurementTest
   
   module ClassMethods
     
+    class AdjustedDateAndTimeSlotOf < ActiveSupport::TestCase
+      
+      {Time.parse('2007-12-09 04:59:59') => [Date.parse('2007-12-08'), 'g'],
+       Time.parse('2007-12-09 05:00:00') => [Date.parse('2007-12-09'), 'a'],
+       Time.parse('2007-12-09 07:59:59') => [Date.parse('2007-12-09'), 'a'],
+       Time.parse('2007-12-09 08:00:00') => [Date.parse('2007-12-09'), 'b'],
+       Time.parse('2007-12-09 10:59:59') => [Date.parse('2007-12-09'), 'b'],
+       Time.parse('2007-12-09 11:00:00') => [Date.parse('2007-12-09'), 'c'],
+       Time.parse('2007-12-09 13:59:59') => [Date.parse('2007-12-09'), 'c'],
+       Time.parse('2007-12-09 14:00:00') => [Date.parse('2007-12-09'), 'd'],
+       Time.parse('2007-12-09 16:59:59') => [Date.parse('2007-12-09'), 'd'],
+       Time.parse('2007-12-09 17:00:00') => [Date.parse('2007-12-09'), 'e'],
+       Time.parse('2007-12-09 19:59:59') => [Date.parse('2007-12-09'), 'e'],
+       Time.parse('2007-12-09 20:00:00') => [Date.parse('2007-12-09'), 'f'],
+       Time.parse('2007-12-09 22:59:59') => [Date.parse('2007-12-09'), 'f'],
+       Time.parse('2007-12-09 23:00:00') => [Date.parse('2007-12-09'), 'g']}.each_pair do |time,
+                                                                                           date_and_time_slot|
+        date, time_slot = date_and_time_slot
+        test "should return #{date} and #{time_slot.inspect} when sent with #{time}" do
+          assert_equal [date, time_slot],
+                       Measurement.adjusted_date_and_time_slot_of(time)
+        end
+      end
+      
+    end
+    
+    class PerPage < ActiveSupport::TestCase
+      
+      test 'should return expected number' do
+        assert_equal 25, Measurement.per_page
+      end
+      
+    end
+    
     class SkewOf < ActiveSupport::TestCase
       
       test 'should return 0.5 when sent with 50' do
@@ -147,248 +181,6 @@ module MeasurementTest
     
     test 'should protect updated_at' do
       assert_nil Measurement.new(:updated_at => '2009-06-10').updated_at
-    end
-    
-  end
-  
-  module AdjustedDateAndTimeSlot
-    
-    class With045959At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 4:59:59',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to day before at when saved' do
-        assert_equal Date.parse('2007-12-08'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to g when saved' do
-        assert_equal 'g', @measurement.time_slot
-      end
-      
-    end
-    
-    class With050000At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 5:00',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "a" when saved' do
-        assert_equal 'a', @measurement.time_slot
-      end
-      
-    end
-    
-    class With075959At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 7:59:59',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "a" when saved' do
-        assert_equal 'a', @measurement.time_slot
-      end
-      
-    end
-    
-    class With080000At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 8:00',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "b" when saved' do
-        assert_equal 'b', @measurement.time_slot
-      end
-      
-    end
-    
-    class With105959At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 10:59:59',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "b" when saved' do
-        assert_equal 'b', @measurement.time_slot
-      end
-      
-    end
-    
-    class With110000At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 11:00',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "c" when saved' do
-        assert_equal 'c', @measurement.time_slot
-      end
-      
-    end
-    
-    class With135959At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 13:59:59',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "c" when saved' do
-        assert_equal 'c', @measurement.time_slot
-      end
-      
-    end
-    
-    class With140000At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 14:00',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "d" when saved' do
-        assert_equal 'd', @measurement.time_slot
-      end
-      
-    end
-    
-    class With165959At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 16:59:59',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "d" when saved' do
-        assert_equal 'd', @measurement.time_slot
-      end
-      
-    end
-    
-    class With170000At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 17:00',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "e" when saved' do
-        assert_equal 'e', @measurement.time_slot
-      end
-      
-    end
-    
-    class With195959At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 19:59:59',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "e" when saved' do
-        assert_equal 'e', @measurement.time_slot
-      end
-      
-    end
-    
-    class With200000At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 20:00',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "f" when saved' do
-        assert_equal 'f', @measurement.time_slot
-      end
-      
-    end
-    
-    class With225959At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 22:59:59',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "f" when saved' do
-        assert_equal 'f', @measurement.time_slot
-      end
-      
-    end
-    
-    class With230000At < ActiveSupport::TestCase
-      
-      def setup
-        @measurement = Measurement.create!(:at => '2007-12-09 23:00',
-                                           :value => 100)
-      end
-      
-      test 'should set adjusted_date to at when saved' do
-        assert_equal Date.parse('2007-12-09'), @measurement.adjusted_date
-      end
-      
-      test 'should set time_slot to "g" when saved' do
-        assert_equal 'g', @measurement.time_slot
-      end
-      
     end
     
   end
@@ -539,17 +331,37 @@ module MeasurementTest
     end
     
     def setup
-      @measurement = Measurement.new(:at => '2009-07-06 21:11', :value => 123)
+      @measurement = Measurement.new(:at => Time.utc('2009-07-06 21:11'),
+                                     :value => 123)
+      Measurement.stubs(:adjusted_date_and_time_slot_of).
+                  returns [Date.parse('2001-09-11'), '@']
       Measurement.stubs(:skew_of).returns 0.123456
+    end
+    
+    test 'should call Measurement.adjusted_date_and_time_slot_of with expected argument when saved' do
+      Measurement.expects(:adjusted_date_and_time_slot_of).
+                  with(Time.utc('2009-07-06 21:11')).
+                  returns [Date.parse('2001-09-11'), '@']
+      @measurement.save!
+    end
+    
+    test 'should set adjusted_date to date returned by Measurement.adjusted_date_and_time_slot_of when saved' do
+      @measurement.save!
+      assert_equal Date.parse('2001-09-11'), @measurement.adjusted_date
+    end
+    
+    test 'should set time_slot to time slot returned by Measurement.adjusted_date_and_time_slot_of when saved' do
+      @measurement.save!
+      assert_equal '@', @measurement.time_slot
     end
     
     test 'should call Measurement.skew_of with value' do
       Measurement.expects(:skew_of).with(123).returns 0.123456
-      @measurement.save
+      @measurement.save!
     end
     
     test 'should set skew to the return value of Measurement.skew_of' do
-      @measurement.save
+      @measurement.save!
       assert_equal 0.123456, @measurement.skew
     end
     

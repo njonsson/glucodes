@@ -5,6 +5,29 @@ class Measurement < ActiveRecord::Base
   
   class << self
     
+    # Returns and array containing the adjusted date and time slot corresponding
+    # to _time_.
+    def adjusted_date_and_time_slot_of(time)
+      case time.hour
+        when (0...5)
+          [time.yesterday.to_date, 'g']
+        when (5...8)
+          [time.to_date, 'a']
+        when (8...11)
+          [time.to_date, 'b']
+        when (11...14)
+          [time.to_date, 'c']
+        when (14...17)
+          [time.to_date, 'd']
+        when (17...20)
+          [time.to_date, 'e']
+        when (20...23)
+          [time.to_date, 'f']
+        else
+          [time.to_date, 'g']
+      end
+    end
+    
     # Returns the default page size for Daily.paginate results.
     def per_page
       25
@@ -75,32 +98,7 @@ private
   end
   
   def set_adjusted_date_and_time_slot
-    case self.at.hour
-      when (0...5)
-        self.time_slot = 'g'
-        self.adjusted_date = at.yesterday.to_date
-      when (5...8)
-        self.time_slot = 'a'
-        self.adjusted_date = at.to_date
-      when (8...11)
-        self.time_slot = 'b'
-        self.adjusted_date = at.to_date
-      when (11...14)
-        self.time_slot = 'c'
-        self.adjusted_date = at.to_date
-      when (14...17)
-        self.time_slot = 'd'
-        self.adjusted_date = at.to_date
-      when (17...20)
-        self.time_slot = 'e'
-        self.adjusted_date = at.to_date
-      when (20...23)
-        self.time_slot = 'f'
-        self.adjusted_date = at.to_date
-      else
-        self.time_slot = 'g'
-        self.adjusted_date = at.to_date
-    end
+    self.adjusted_date, self.time_slot = Measurement.adjusted_date_and_time_slot_of(at)
     self
   end
   
