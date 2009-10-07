@@ -9,22 +9,14 @@ class Measurement < ActiveRecord::Base
     # to _time_.
     def adjusted_date_and_time_slot_of(time)
       case time.hour
-        when (0...5)
-          [time.yesterday.to_date, 'g']
-        when (5...8)
-          [time.to_date, 'a']
-        when (8...11)
-          [time.to_date, 'b']
-        when (11...14)
-          [time.to_date, 'c']
-        when (14...17)
-          [time.to_date, 'd']
-        when (17...20)
-          [time.to_date, 'e']
-        when (20...23)
-          [time.to_date, 'f']
-        else
-          [time.to_date, 'g']
+        when (0...5)   then [time.yesterday.to_date, 'g']
+        when (5...8)   then [time.to_date, 'a']
+        when (8...11)  then [time.to_date, 'b']
+        when (11...14) then [time.to_date, 'c']
+        when (14...17) then [time.to_date, 'd']
+        when (17...20) then [time.to_date, 'e']
+        when (20...23) then [time.to_date, 'f']
+        else                [time.to_date, 'g']
       end
     end
     

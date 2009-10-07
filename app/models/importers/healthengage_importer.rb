@@ -50,19 +50,19 @@ private
   
   def prepend_event_to_notes(event_id, notes)
     event = case event_id
-              when  '0': nil
-              when  '1': 'Fasting'
-              when  '2': 'Before Exercise'
-              when  '3': 'After Exercise'
-              when  '4': 'Illness'
-              when  '5': 'Hypoglycemic'
-              when  '6': 'Hyperglycemic'
-              when  '7': 'Carb Intake'
-              when  '8': 'Insulin Dose'
-              when '10': 'Stress'
-              when '11': 'Oral Medication'
-              when '12': nil # A "See Notes" event
-              else       "[HealthEngage event #{event_id}]"
+              when  '0' then nil
+              when  '1' then 'Fasting'
+              when  '2' then 'Before Exercise'
+              when  '3' then 'After Exercise'
+              when  '4' then 'Illness'
+              when  '5' then 'Hypoglycemic'
+              when  '6' then 'Hyperglycemic'
+              when  '7' then 'Carb Intake'
+              when  '8' then 'Insulin Dose'
+              when '10' then 'Stress'
+              when '11' then 'Oral Medication'
+              when '12' then nil # A "See Notes" event
+              else           "[HealthEngage event #{event_id}]"
             end
     if event
       return event unless notes
